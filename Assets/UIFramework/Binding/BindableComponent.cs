@@ -10,8 +10,9 @@ namespace UIFramework.Binding
     {
         protected DataBindingContext BindingContext { get; private set; }
 
-        protected virtual void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             BindingContext = new DataBindingContext();
             InitializeBindings();
         }

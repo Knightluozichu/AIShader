@@ -49,8 +49,9 @@ namespace UIFramework.Rendering
             }
         }
 
-        protected virtual void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             _canvasRenderer = GetComponent<CanvasRenderer>();
             if (_canvasRenderer == null)
             {
@@ -90,8 +91,9 @@ namespace UIFramework.Rendering
             }
         }
 
-        protected virtual void OnEnable()
+        protected override void OnEnable()
         {
+            base.OnEnable();
             _isDirty = true;
             if (_canvasRenderer != null)
             {
@@ -99,8 +101,9 @@ namespace UIFramework.Rendering
             }
         }
 
-        protected virtual void OnDisable()
+        protected override void OnDisable()
         {
+            base.OnDisable();
             if (_canvasRenderer != null)
             {
                 _canvasRenderer.cull = true;

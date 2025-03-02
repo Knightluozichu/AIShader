@@ -9,8 +9,9 @@ namespace UIFramework.Theme
     /// </summary>
     public abstract class ThemeableComponent : UIComponentBase, IThemeable
     {
-        protected virtual void OnEnable()
+        protected override void OnEnable()
         {
+            base.OnEnable();
             UIEventManager.Instance.AddEventListener<ThemeManager.ThemeChangedEventArgs>(
                 "ThemeChanged", OnThemeChanged);
             
@@ -22,8 +23,9 @@ namespace UIFramework.Theme
             }
         }
 
-        protected virtual void OnDisable()
+        protected override void OnDisable()
         {
+            base.OnDisable();
             UIEventManager.Instance.RemoveEventListener<ThemeManager.ThemeChangedEventArgs>(
                 "ThemeChanged", OnThemeChanged);
         }
