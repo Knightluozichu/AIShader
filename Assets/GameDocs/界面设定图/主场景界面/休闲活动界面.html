@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>休闲活动</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: #2C3333;
+      color: #A5C9CA;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background-color: rgba(57, 91, 100, 0.1);
+      border-radius: 12px;
+      padding: 24px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(165, 201, 202, 0.2);
+    }
+
+    .header {
+      margin-bottom: 32px;
+    }
+
+    .title {
+      font-size: 24px;
+      color: #00FFFF;
+      margin-bottom: 8px;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #A5C9CA;
+      opacity: 0.8;
+    }
+
+    .activity-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .activity-card {
+      background: rgba(57, 91, 100, 0.2);
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid rgba(165, 201, 202, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .activity-card:hover {
+      transform: translateY(-2px);
+      border-color: #00FFFF;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+    }
+
+    .game-section {
+      margin-bottom: 32px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      color: #00FFFF;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .game-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .game-card {
+      background: rgba(0, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .game-card:hover {
+      background: rgba(0, 255, 255, 0.1);
+      transform: scale(1.02);
+    }
+
+    .game-icon {
+      width: 60px;
+      height: 60px;
+      background: rgba(0, 255, 255, 0.1);
+      border-radius: 12px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+
+    .game-title {
+      font-size: 16px;
+      color: #00FFFF;
+      margin-bottom: 8px;
+    }
+
+    .game-description {
+      font-size: 12px;
+      opacity: 0.8;
+      line-height: 1.4;
+    }
+
+    .competition-section {
+      margin-bottom: 32px;
+    }
+
+    .competition-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .competition-item {
+      background: rgba(0, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .competition-info {
+      flex: 1;
+    }
+
+    .competition-title {
+      font-size: 16px;
+      color: #00FFFF;
+      margin-bottom: 8px;
+    }
+
+    .competition-meta {
+      font-size: 12px;
+      opacity: 0.8;
+      display: flex;
+      gap: 16px;
+    }
+
+    .join-button {
+      padding: 8px 16px;
+      background: rgba(0, 255, 255, 0.1);
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      border-radius: 6px;
+      color: #00FFFF;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .join-button:hover {
+      background: rgba(0, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .relax-section {
+      background: rgba(57, 91, 100, 0.2);
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .relax-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .relax-card {
+      background: rgba(0, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 16px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .relax-card:hover {
+      background: rgba(0, 255, 255, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .relax-icon {
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+
+    .relax-title {
+      font-size: 16px;
+      color: #00FFFF;
+      margin-bottom: 8px;
+    }
+
+    .relax-description {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 class="title">休闲活动</h1>
+      <div class="subtitle">放松身心，享受趣味时光</div>
+    </div>
+
+    <div class="game-section">
+      <h2 class="section-title">小游戏</h2>
+      <div class="game-grid">
+        <div class="game-card">
+          <div class="game-icon">🎮</div>
+          <div class="game-title">记忆配对</div>
+          <div class="game-description">考验记忆力的趣味配对游戏，找出相同的卡片。</div>
+        </div>
+        <div class="game-card">
+          <div class="game-icon">🧩</div>
+          <div class="game-title">数独挑战</div>
+          <div class="game-description">经典数独游戏，锻炼逻辑思维能力。</div>
+        </div>
+        <div class="game-card">
+          <div class="game-icon">🎯</div>
+          <div class="game-title">飞镖投掷</div>
+          <div class="game-description">考验准确度的休闲小游戏。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="competition-section">
+      <h2 class="section-title">趣味竞赛</h2>
+      <div class="competition-list">
+        <div class="competition-item">
+          <div class="competition-info">
+            <div class="competition-title">每周答题王</div>
+            <div class="competition-meta">
+              <span>参与人数：28</span>
+              <span>剩余时间：2天</span>
+            </div>
+          </div>
+          <button class="join-button">参与竞赛</button>
+        </div>
+        <div class="competition-item">
+          <div class="competition-info">
+            <div class="competition-title">创意写作大赛</div>
+            <div class="competition-meta">
+              <span>参与人数：15</span>
+              <span>剩余时间：5天</span>
+            </div>
+          </div>
+          <button class="join-button">参与竞赛</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="relax-section">
+      <h2 class="section-title">放松空间</h2>
+      <div class="relax-grid">
+        <div class="relax-card">
+          <div class="relax-icon">🎵</div>
+          <div class="relax-title">轻音乐</div>
+          <div class="relax-description">舒缓的背景音乐，帮助放松心情</div>
+        </div>
+        <div class="relax-card">
+          <div class="relax-icon">🌿</div>
+          <div class="relax-title">冥想指导</div>
+          <div class="relax-description">专业的冥想音频，缓解工作压力</div>
+        </div>
+        <div class="relax-card">
+          <div class="relax-icon">☕️</div>
+          <div class="relax-title">休息提醒</div>
+          <div class="relax-description">定时提醒休息，保护身心健康</div>
+        </div>
+        <div class="relax-card">
+          <div class="relax-icon">🎨</div>
+          <div class="relax-title">涂色放松</div>
+          <div class="relax-description">数字涂色游戏，释放压力</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

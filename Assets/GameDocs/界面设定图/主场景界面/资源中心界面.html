@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>资源中心</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: #2C3333;
+      color: #A5C9CA;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background-color: rgba(57, 91, 100, 0.1);
+      border-radius: 12px;
+      padding: 24px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(165, 201, 202, 0.2);
+    }
+
+    .header {
+      margin-bottom: 32px;
+    }
+
+    .title {
+      font-size: 24px;
+      color: #00FFFF;
+      margin-bottom: 8px;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #A5C9CA;
+      opacity: 0.8;
+    }
+
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .resource-card {
+      background: rgba(57, 91, 100, 0.2);
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid rgba(165, 201, 202, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .resource-card:hover {
+      transform: translateY(-2px);
+      border-color: #00FFFF;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+    }
+
+    .section-title {
+      font-size: 18px;
+      color: #00FFFF;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .resource-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .resource-item {
+      background: rgba(0, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .resource-item:hover {
+      background: rgba(0, 255, 255, 0.1);
+    }
+
+    .resource-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .resource-name {
+      color: #00FFFF;
+      font-size: 14px;
+    }
+
+    .resource-meta {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    .resource-info {
+      font-size: 12px;
+      opacity: 0.8;
+      line-height: 1.4;
+    }
+
+    .resource-status {
+      font-size: 12px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: rgba(0, 255, 255, 0.1);
+    }
+
+    .btn {
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: none;
+      border: 1px solid;
+      color: inherit;
+      margin-top: 16px;
+    }
+
+    .btn-primary {
+      border-color: #00FFFF;
+      color: #00FFFF;
+    }
+
+    .btn-primary:hover {
+      background: rgba(0, 255, 255, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 class="title">资源中心</h1>
+      <div class="subtitle">管理会议材料、模板和设备，提供全方位会议支持</div>
+    </div>
+
+    <div class="resource-grid">
+      <!-- 会议材料 -->
+      <div class="resource-card">
+        <h2 class="section-title">会议材料</h2>
+        <div class="resource-list">
+          <div class="resource-item">
+            <div class="resource-header">
+              <span class="resource-name">Q4季度报告.pptx</span>
+              <span class="resource-meta">2.5MB</span>
+            </div>
+            <div class="resource-info">上传时间：2023/12/15</div>
+            <div class="resource-info">上传人：张经理</div>
+          </div>
+          <div class="resource-item">
+            <div class="resource-header">
+              <span class="resource-name">项目进度汇报.pdf</span>
+              <span class="resource-meta">1.8MB</span>
+            </div>
+            <div class="resource-info">上传时间：2023/12/14</div>
+            <div class="resource-info">上传人：李主管</div>
+          </div>
+        </div>
+        <button class="btn btn-primary">上传材料</button>
+      </div>
+
+      <!-- 模板下载 -->
+      <div class="resource-card">
+        <h2 class="section-title">模板下载</h2>
+        <div class="resource-list">
+          <div class="resource-item">
+            <div class="resource-header">
+              <span class="resource-name">周会汇报模板</span>
+              <span class="resource-meta">PPT</span>
+            </div>
+            <div class="resource-info">更新时间：2023/12/01</div>
+            <div class="resource-info">下载次数：128</div>
+          </div>
+          <div class="resource-item">
+            <div class="resource-header">
+              <span class="resource-name">会议纪要模板</span>
+              <span class="resource-meta">Word</span>
+            </div>
+            <div class="resource-info">更新时间：2023/11/28</div>
+            <div class="resource-info">下载次数：256</div>
+          </div>
+        </div>
+        <button class="btn btn-primary">管理模板</button>
+      </div>
+
+      <!-- 投影设备 -->
+      <div class="resource-card">
+        <h2 class="section-title">投影设备</h2>
+        <div class="resource-list">
+          <div class="resource-item">
+            <div class="resource-header">
+              <span class="resource-name">第一会议室</span>
+              <span class="resource-status">空闲</span>
+            </div>
+            <div class="resource-info">设备：4K投影仪</div>
+            <div class="resource-info">支持：无线投屏</div>
+          </div>
+          <div class="resource-item">
+            <div class="resource-header">
+              <span class="resource-name">第二会议室</span>
+              <span class="resource-status">使用中</span>
+            </div>
+            <div class="resource-info">设备：触控大屏</div>
+            <div class="resource-info">支持：远程会议</div>
+          </div>
+        </div>
+        <button class="btn btn-primary">预约设备</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

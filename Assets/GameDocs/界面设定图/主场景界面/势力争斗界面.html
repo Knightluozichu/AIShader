@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>势力争斗</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: #2C3333;
+      color: #A5C9CA;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background-color: rgba(57, 91, 100, 0.1);
+      border-radius: 12px;
+      padding: 24px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(165, 201, 202, 0.2);
+    }
+
+    .header {
+      margin-bottom: 32px;
+    }
+
+    .title {
+      font-size: 24px;
+      color: #00FFFF;
+      margin-bottom: 8px;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #A5C9CA;
+      opacity: 0.8;
+    }
+
+    .power-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .power-card {
+      background: rgba(57, 91, 100, 0.2);
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid rgba(165, 201, 202, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .power-card:hover {
+      transform: translateY(-2px);
+      border-color: #00FFFF;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+    }
+
+    .section-title {
+      font-size: 18px;
+      color: #00FFFF;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .task-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .task-item {
+      background: rgba(0, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .task-item:hover {
+      background: rgba(0, 255, 255, 0.1);
+    }
+
+    .task-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .task-name {
+      color: #00FFFF;
+      font-size: 14px;
+    }
+
+    .task-reward {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    .task-description {
+      font-size: 12px;
+      opacity: 0.8;
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+
+    .task-progress {
+      height: 4px;
+      background: rgba(0, 255, 255, 0.1);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #00FFFF, #39FF14);
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+    }
+
+    .alliance-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .alliance-item {
+      background: rgba(0, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .alliance-item:hover {
+      background: rgba(0, 255, 255, 0.1);
+    }
+
+    .alliance-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .alliance-faction {
+      color: #00FFFF;
+      font-size: 14px;
+    }
+
+    .alliance-status {
+      font-size: 12px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: rgba(0, 255, 255, 0.1);
+    }
+
+    .alliance-benefits {
+      font-size: 12px;
+      opacity: 0.8;
+      line-height: 1.4;
+    }
+
+    .activity-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .activity-item {
+      background: rgba(0, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .activity-item:hover {
+      background: rgba(0, 255, 255, 0.1);
+    }
+
+    .activity-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .activity-name {
+      color: #00FFFF;
+      font-size: 14px;
+    }
+
+    .activity-time {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    .activity-description {
+      font-size: 12px;
+      opacity: 0.8;
+      line-height: 1.4;
+    }
+
+    .btn {
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: none;
+      border: 1px solid;
+      color: inherit;
+      margin-top: 16px;
+    }
+
+    .btn-primary {
+      border-color: #00FFFF;
+      color: #00FFFF;
+    }
+
+    .btn-primary:hover {
+      background: rgba(0, 255, 255, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 class="title">势力争斗</h1>
+      <div class="subtitle">参与派系任务，建立联盟，展开政治活动</div>
+    </div>
+
+    <div class="power-grid">
+      <!-- 派系任务 -->
+      <div class="power-card">
+        <h2 class="section-title">派系任务</h2>
+        <div class="task-list">
+          <div class="task-item">
+            <div class="task-header">
+              <span class="task-name">削弱竞争对手</span>
+              <span class="task-reward">影响力 +50</span>
+            </div>
+            <div class="task-description">收集竞争部门的负面信息，在适当时机曝光。</div>
+            <div class="task-progress">
+              <div class="progress-fill" style="width: 60%"></div>
+            </div>
+          </div>
+          <div class="task-item">
+            <div class="task-header">
+              <span class="task-name">拉拢关键人物</span>
+              <span class="task-reward">影响力 +30</span>
+            </div>
+            <div class="task-description">说服技术部核心骨干加入我们的阵营。</div>
+            <div class="task-progress">
+              <div class="progress-fill" style="width: 40%"></div>
+            </div>
+          </div>
+          <div class="task-item">
+            <div class="task-header">
+              <span class="task-name">资源争夺</span>
+              <span class="task-reward">影响力 +40</span>
+            </div>
+            <div class="task-description">在预算分配会议中为部门争取更多资源。</div>
+            <div class="task-progress">
+              <div class="progress-fill" style="width: 20%"></div>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-primary">接取任务</button>
+      </div>
+
+      <!-- 结盟机会 -->
+      <div class="power-card">
+        <h2 class="section-title">结盟机会</h2>
+        <div class="alliance-list">
+          <div class="alliance-item">
+            <div class="alliance-header">
+              <span class="alliance-faction">技术派系</span>
+              <span class="alliance-status">可结盟</span>
+            </div>
+            <div class="alliance-benefits">共享技术资源，优先获取项目信息，互助升职。</div>
+          </div>
+          <div class="alliance-item">
+            <div class="alliance-header">
+              <span class="alliance-faction">市场派系</span>
+              <span class="alliance-status">商议中</span>
+            </div>
+            <div class="alliance-benefits">共同对抗财务部压力，争取更多预算空间。</div>
+          </div>
+          <div class="alliance-item">
+            <div class="alliance-header">
+              <span class="alliance-faction">人事派系</span>
+              <span class="alliance-status">已结盟</span>
+            </div>
+            <div class="alliance-benefits">优先获得晋升机会，人事调动话语权。</div>
+          </div>
+        </div>
+        <button class="btn btn-primary">寻找盟友</button>
+      </div>
+
+      <!-- 政治活动 -->
+      <div class="power-card">
+        <h2 class="section-title">政治活动</h2>
+        <div class="activity-list">
+          <div class="activity-item">
+            <div class="activity-header">
+              <span class="activity-name">部门预算会议</span>
+              <span class="activity-time">3天后</span>
+            </div>
+            <div class="activity-description">年度预算分配大会，各派系必争之地。</div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-header">
+              <span class="activity-name">高层晋升答辩</span>
+              <span class="activity-time">5天后</span>
+            </div>
+            <div class="activity-description">关键岗位竞争，需要提前布局拉票。</div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-header">
+              <span class="activity-name">项目评审会</span>
+              <span class="activity-time">1周后</span>
+            </div>
+            <div class="activity-description">新项目立项评审，影响资源分配格局。</div>
+          </div>
+        </div>
+        <button class="btn btn-primary">参与活动</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

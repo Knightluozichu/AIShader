@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>水浒 - FUK-U 天罡地煞管理系统</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    }
+    
+    body {
+      background-color: #2C3333;
+      color: #A5C9CA;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+    
+    /* Header styles */
+    .header {
+      height: 60px;
+      background-color: rgba(57, 91, 100, 0.1);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      border-bottom: 1px solid rgba(165, 201, 202, 0.2);
+    }
+    
+    .logo-container {
+      display: flex;
+      align-items: center;
+    }
+    
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+      color: #00FFFF;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+      margin-right: 15px;
+    }
+    
+    .department {
+      font-size: 16px;
+      color: #A5C9CA;
+      border-left: 1px solid rgba(165, 201, 202, 0.2);
+      padding-left: 15px;
+    }
+    
+    .search-container {
+      display: flex;
+      align-items: center;
+      background-color: rgba(57, 91, 100, 0.2);
+      border-radius: 8px;
+      padding: 5px 10px;
+      border: 1px solid rgba(165, 201, 202, 0.2);
+      width: 300px;
+    }
+    
+    .search-icon {
+      color: #A5C9CA;
+      margin-right: 8px;
+    }
+    
+    .search-input {
+      background: transparent;
+      border: none;
+      outline: none;
+      width: 100%;
+      font-size: 14px;
+      color: #A5C9CA;
+    }
+    
+    .search-input::placeholder {
+      color: rgba(165, 201, 202, 0.5);
+    }
+    
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .notification {
+      position: relative;
+      cursor: pointer;
+      color: #A5C9CA;
+      transition: color 0.3s ease;
+    }
+    
+    .notification:hover {
+      color: #00FFFF;
+    }
+    
+    .notification-badge {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background-color: #00FFFF;
+      color: #2C3333;
+      border-radius: 50%;
+      width: 16px;
+      height: 16px;
+      font-size: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: rgba(0, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #00FFFF;
+      font-weight: bold;
+      border: 1px solid rgba(0, 255, 255, 0.2);
+    }
+    
+    /* Main container */
+    .main-container {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+    
+    /* Sidebar styles */
+    .sidebar {
+      width: 240px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-right: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 20px 0;
+      overflow-y: auto;
+    }
+
+    .menu-group {
+      margin-bottom: 20px;
+    }
+
+    .menu-group-title {
+      font-size: 14px;
+      color: #00FFFF;
+      opacity: 0.8;
+      padding: 12px 20px;
+      margin-top: 10px;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+    }
+    
+    .menu-item {
+      display: flex;
+      align-items: center;
+      padding: 12px 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      color: #A5C9CA;
+    }
+    
+    .menu-item:hover {
+      background-color: rgba(0, 255, 255, 0.1);
+      color: #00FFFF;
+    }
+    
+    .menu-item.active {
+      background-color: rgba(0, 255, 255, 0.15);
+      border-left: 3px solid #00FFFF;
+      color: #00FFFF;
+    }
+    
+    .menu-icon {
+      margin-right: 12px;
+    }
+    
+    .menu-text {
+      font-size: 14px;
+    }
+    
+    /* Content area */
+    .content {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      background-color: #2C3333;
+    }
+    
+    #mainFrame {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: transparent;
+    }
+  </style>
+  <script>
+    function loadPage(url) {
+      fetch(url)
+        .then(response => response.text())
+        .then(content => {
+          const frame = document.getElementById('mainFrame');
+          const frameDoc = frame.contentDocument || frame.contentWindow.document;
+          frameDoc.open();
+          frameDoc.write(content);
+          frameDoc.close();
+          
+          // 更新活动状态
+          document.querySelectorAll('.menu-item').forEach(item => {
+            item.classList.remove('active');
+          });
+          document.querySelector(`[href="${url}"]`).classList.add('active');
+        })
+        .catch(error => console.error('加载页面失败:', error));
+    }
+  </script>
+</head>
+<body>
+  <!-- Header -->
+  <div class="header">
+    <div class="logo-container">
+      <div class="logo">水浒 - FUK-U</div>
+      <div class="department">天罡地煞管理系统</div>
+    </div>
+    
+    <div class="search-container">
+      <div class="search-icon">🔍</div>
+      <input type="text" class="search-input" placeholder="搜索任务、同事或会议...">
+    </div>
+    
+    <div class="user-info">
+      <div class="notification">
+        🔔
+        <div class="notification-badge">3</div>
+      </div>
+      <div class="avatar">武</div>
+      <span>武松</span>
+    </div>
+  </div>
+  
+  <!-- Main container -->
+  <div class="main-container">
+    <!-- Left sidebar -->
+    <div class="sidebar">
+      <!-- 工作管理 -->
+      <div class="menu-group">
+        <div class="menu-group-title">工作管理</div>
+        <a href="主场景界面/今日概览面板.html" class="menu-item active" onclick="loadPage(this.href); return false;">
+          <div class="menu-icon">📊</div>
+          <div class="menu-text">今日概览</div>
+        </a>
+        <a href="主场景界面/任务中心界面.html" class="menu-item" onclick="loadPage(this.href); return false;">
+          <div class="menu-icon">📝</div>
+          <div class="menu-text">任务中心</div>
+        </a>
+        <a href="主场景界面/绩效考核界面.html" class="menu-item" onclick="loadPage(this.href); return false;">
+          <div class="menu-icon">📈</div>
+          <div class="menu-text">绩效考核</div>
+        </a>
+      </div>
+
+      <!-- 社交系统 -->
+      <div class="menu-group">
+        <div class="menu-group-title">社交系统</div>
+        <a href="主场景界面/势力争斗界面.html" class="menu-item" onclick="loadPage(this.href); return false;">
+          <div class="menu-icon">🏢</div>
+          <div class="menu-text">势力争斗</div>
+        </a>
+        <a href="主场景界面/茶水间情报界面.html" class="menu-item" onclick="loadPage(this.href); return false;">
+          <div class="menu-icon">☕</div>
+          <div class="menu-text">茶水间情报</div>
+        </a>
+        <a href="主场景界面/八卦论坛界面.html" class="menu-item" onclick="loadPage(this.href); return false;">
+          <div class="menu-icon">💬</div>
+          <div class="menu-text">八卦论坛</div>
+        </a>
+      </div>
+
+      <!-- 办公管理 -->
+      <div class="menu-group">
+        <div class="menu-group-title">办公管理</div>
+        <a href="主场景界面/会议管理界面.html" class="menu-item" onclick="loadPage(this.href); return false;">
+          <div class="menu-icon">🗓️</div>
+          <div class="menu-text">会议管理</div>
+        </a>
+        <a href="主场景界面/工位装饰界面.html" class="menu-item" onclick="loadPage(this.href); return false;">
+          <div class="menu-icon">🎨</div>
+          <div class="menu-text">工位装饰</div>
+        </a>
+      </div>
+    </div>
+    
+    <!-- Content area -->
+    <div class="content">
+      <iframe id="mainFrame" src="主场景界面/今日概览面板.html"></iframe>
+    </div>
+  </div>
+</body>
+</html>

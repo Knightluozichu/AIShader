@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>个人终端</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: #2C3333;
+      color: #A5C9CA;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background-color: rgba(57, 91, 100, 0.1);
+      border-radius: 12px;
+      padding: 24px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(165, 201, 202, 0.2);
+    }
+
+    .header {
+      margin-bottom: 32px;
+    }
+
+    .title {
+      font-size: 24px;
+      color: #00FFFF;
+      margin-bottom: 8px;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #A5C9CA;
+      opacity: 0.8;
+    }
+
+    .terminal-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .terminal-card {
+      background: rgba(57, 91, 100, 0.2);
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid rgba(165, 201, 202, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .terminal-card:hover {
+      transform: translateY(-2px);
+      border-color: #00FFFF;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+    }
+
+    .section-title {
+      font-size: 18px;
+      color: #00FFFF;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .file-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .file-item {
+      background: rgba(0, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .file-item:hover {
+      background: rgba(0, 255, 255, 0.1);
+    }
+
+    .file-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .file-name {
+      color: #00FFFF;
+      font-size: 14px;
+    }
+
+    .file-meta {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    .app-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .app-item {
+      background: rgba(0, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 16px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .app-item:hover {
+      background: rgba(0, 255, 255, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .app-icon {
+      font-size: 24px;
+      color: #00FFFF;
+      margin-bottom: 8px;
+    }
+
+    .app-name {
+      font-size: 14px;
+    }
+
+    .chat-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .chat-item {
+      background: rgba(0, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .chat-item:hover {
+      background: rgba(0, 255, 255, 0.1);
+    }
+
+    .chat-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .chat-name {
+      color: #00FFFF;
+      font-size: 14px;
+    }
+
+    .chat-time {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    .chat-preview {
+      font-size: 12px;
+      opacity: 0.8;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .btn {
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: none;
+      border: 1px solid;
+      color: inherit;
+      margin-top: 16px;
+    }
+
+    .btn-primary {
+      border-color: #00FFFF;
+      color: #00FFFF;
+    }
+
+    .btn-primary:hover {
+      background: rgba(0, 255, 255, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 class="title">个人终端</h1>
+      <div class="subtitle">管理你的文件、通讯和应用</div>
+    </div>
+
+    <div class="terminal-grid">
+      <!-- 文件管理 -->
+      <div class="terminal-card">
+        <h2 class="section-title">文件管理</h2>
+        <div class="file-list">
+          <div class="file-item">
+            <div class="file-header">
+              <span class="file-name">项目报告.docx</span>
+              <span class="file-meta">2.5MB</span>
+            </div>
+            <div class="file-meta">修改时间：2023/12/15</div>
+          </div>
+          <div class="file-item">
+            <div class="file-header">
+              <span class="file-name">会议记录.txt</span>
+              <span class="file-meta">128KB</span>
+            </div>
+            <div class="file-meta">修改时间：2023/12/14</div>
+          </div>
+        </div>
+        <button class="btn btn-primary">上传文件</button>
+      </div>
+
+      <!-- 通讯工具 -->
+      <div class="terminal-card">
+        <h2 class="section-title">通讯工具</h2>
+        <div class="chat-list">
+          <div class="chat-item">
+            <div class="chat-header">
+              <span class="chat-name">项目组</span>
+              <span class="chat-time">10:30</span>
+            </div>
+            <div class="chat-preview">下午3点开会讨论新功能</div>
+          </div>
+          <div class="chat-item">
+            <div class="chat-header">
+              <span class="chat-name">技术支持</span>
+              <span class="chat-time">09:15</span>
+            </div>
+            <div class="chat-preview">服务器维护通知</div>
+          </div>
+        </div>
+        <button class="btn btn-primary">发起会话</button>
+      </div>
+
+      <!-- 应用中心 -->
+      <div class="terminal-card">
+        <h2 class="section-title">应用中心</h2>
+        <div class="app-grid">
+          <div class="app-item">
+            <div class="app-icon">📊</div>
+            <div class="app-name">数据分析</div>
+          </div>
+          <div class="app-item">
+            <div class="app-icon">📝</div>
+            <div class="app-name">笔记</div>
+          </div>
+          <div class="app-item">
+            <div class="app-icon">📅</div>
+            <div class="app-name">日程</div>
+          </div>
+          <div class="app-item">
+            <div class="app-icon">⚙️</div>
+            <div class="app-name">设置</div>
+          </div>
+        </div>
+        <button class="btn btn-primary">管理应用</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

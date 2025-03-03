@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>今日概览面板</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .panel {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .panel-header {
+            background-color: #e6f7f5;
+            padding: 16px 24px;
+            border-bottom: 1px solid #c5e8e5;
+        }
+        
+        .panel-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333333;
+        }
+        
+        .panel-date {
+            font-size: 14px;
+            color: #777777;
+            margin-top: 4px;
+        }
+        
+        .panel-section {
+            padding: 16px 24px;
+        }
+        
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #444444;
+            margin-bottom: 12px;
+        }
+        
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+        
+        .kpi-card {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 12px;
+        }
+        
+        .kpi-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .kpi-name {
+            font-size: 14px;
+            color: #555555;
+        }
+        
+        .kpi-value {
+            font-size: 14px;
+            font-weight: 500;
+            color: #20b2aa;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: #20b2aa;
+            border-radius: 4px;
+        }
+        
+        .todo-section {
+            background-color: #f7f7f7;
+        }
+        
+        .todo-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        
+        .todo-count {
+            font-size: 14px;
+            color: #20b2aa;
+            font-weight: 500;
+        }
+        
+        .todo-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .todo-item {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+        
+        .todo-left {
+            display: flex;
+            align-items: center;
+        }
+        
+        .todo-dot {
+            width: 10px;
+            height: 10px;
+            background-color: #20b2aa;
+            border-radius: 50%;
+            margin-right: 12px;
+        }
+        
+        .todo-title {
+            font-size: 14px;
+            color: #444444;
+        }
+        
+        .todo-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .priority-tag {
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+        
+        .priority-high {
+            background-color: #ffe0e0;
+            color: #ff5252;
+        }
+        
+        .priority-medium {
+            background-color: #e0f0ff;
+            color: #2196f3;
+        }
+        
+        .priority-low {
+            background-color: #e0ffe0;
+            color: #4caf50;
+        }
+        
+        .todo-deadline {
+            font-size: 12px;
+            color: #888888;
+        }
+        
+        .panel-footer {
+            padding: 12px 24px;
+            border-top: 1px solid #eeeeee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .view-all {
+            font-size: 14px;
+            color: #777777;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .view-all:hover {
+            color: #20b2aa;
+        }
+        
+        .add-task {
+            background-color: #20b2aa;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 6px 16px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        .add-task:hover {
+            background-color: #1a9690;
+        }
+    </style>
+</head>
+<body>
+    <div class="panel">
+        <div class="panel-header">
+            <h2 class="panel-title">今日概览</h2>
+            <p class="panel-date">2025年3月3日 星期一</p>
+        </div>
+        
+        <!-- KPI Section -->
+        <div class="panel-section">
+            <h3 class="section-title">KPI 指标</h3>
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <span class="kpi-name">完成任务</span>
+                        <span class="kpi-value">24/30个</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 80%"></div>
+                    </div>
+                </div>
+                
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <span class="kpi-name">工时利用率</span>
+                        <span class="kpi-value">87/90%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 97%"></div>
+                    </div>
+                </div>
+                
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <span class="kpi-name">客户满意度</span>
+                        <span class="kpi-value">92/95%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 97%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Todo Tasks Section -->
+        <div class="panel-section todo-section">
+            <div class="todo-header">
+                <h3 class="section-title">待办任务提醒</h3>
+                <span class="todo-count">4个待办</span>
+            </div>
+            
+            <div class="todo-list">
+                <div class="todo-item">
+                    <div class="todo-left">
+                        <div class="todo-dot"></div>
+                        <span class="todo-title">系统安全检查</span>
+                    </div>
+                    <div class="todo-right">
+                        <span class="priority-tag priority-high">紧急</span>
+                        <span class="todo-deadline">10:30</span>
+                    </div>
+                </div>
+                
+                <div class="todo-item">
+                    <div class="todo-left">
+                        <div class="todo-dot"></div>
+                        <span class="todo-title">周报提交</span>
+                    </div>
+                    <div class="todo-right">
+                        <span class="priority-tag priority-medium">普通</span>
+                        <span class="todo-deadline">16:00</span>
+                    </div>
+                </div>
+                
+                <div class="todo-item">
+                    <div class="todo-left">
+                        <div class="todo-dot"></div>
+                        <span class="todo-title">团队会议</span>
+                    </div>
+                    <div class="todo-right">
+                        <span class="priority-tag priority-medium">普通</span>
+                        <span class="todo-deadline">14:00</span>
+                    </div>
+                </div>
+                
+                <div class="todo-item">
+                    <div class="todo-left">
+                        <div class="todo-dot"></div>
+                        <span class="todo-title">代码审核</span>
+                    </div>
+                    <div class="todo-right">
+                        <span class="priority-tag priority-low">低优</span>
+                        <span class="todo-deadline">15:30</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bottom Actions -->
+        <div class="panel-footer">
+            <a class="view-all">查看全部任务</a>
+            <button class="add-task">添加任务</button>
+        </div>
+    </div>
+</body>
+</html>

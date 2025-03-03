@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>会议模式</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: #2C3333;
+      color: #A5C9CA;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background-color: rgba(57, 91, 100, 0.1);
+      border-radius: 12px;
+      padding: 24px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(165, 201, 202, 0.2);
+    }
+
+    .header {
+      margin-bottom: 32px;
+    }
+
+    .title {
+      font-size: 24px;
+      color: #00FFFF;
+      margin-bottom: 8px;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #A5C9CA;
+      opacity: 0.8;
+    }
+
+    .mode-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .mode-card {
+      background: rgba(57, 91, 100, 0.2);
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid rgba(165, 201, 202, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .mode-card:hover {
+      transform: translateY(-2px);
+      border-color: #00FFFF;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+    }
+
+    .mode-icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 16px;
+      background: rgba(0, 255, 255, 0.1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: #00FFFF;
+    }
+
+    .mode-title {
+      font-size: 18px;
+      color: #00FFFF;
+      margin-bottom: 12px;
+    }
+
+    .mode-description {
+      font-size: 14px;
+      color: #A5C9CA;
+      opacity: 0.8;
+      line-height: 1.4;
+      margin-bottom: 16px;
+    }
+
+    .feature-list {
+      list-style: none;
+      margin-bottom: 20px;
+    }
+
+    .feature-item {
+      font-size: 12px;
+      color: #A5C9CA;
+      opacity: 0.8;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .feature-item::before {
+      content: '';
+      width: 4px;
+      height: 4px;
+      background: #00FFFF;
+      border-radius: 50%;
+    }
+
+    .btn {
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: none;
+      border: 1px solid;
+      color: inherit;
+      width: 100%;
+    }
+
+    .btn-primary {
+      border-color: #00FFFF;
+      color: #00FFFF;
+    }
+
+    .btn-primary:hover {
+      background: rgba(0, 255, 255, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 class="title">会议模式</h1>
+      <div class="subtitle">选择适合的会议模式，提升会议效率</div>
+    </div>
+
+    <div class="mode-grid">
+      <!-- 头脑风暴 -->
+      <div class="mode-card">
+        <div class="mode-icon">💡</div>
+        <h2 class="mode-title">头脑风暴</h2>
+        <p class="mode-description">激发团队创意，收集多元化想法</p>
+        <ul class="feature-list">
+          <li class="feature-item">实时想法收集与展示</li>
+          <li class="feature-item">匿名投票与评分系统</li>
+          <li class="feature-item">创意分类与整理工具</li>
+          <li class="feature-item">多维度思维导图</li>
+        </ul>
+        <button class="btn btn-primary">使用此模式</button>
+      </div>
+
+      <!-- 战略会议 -->
+      <div class="mode-card">
+        <div class="mode-icon">🎯</div>
+        <h2 class="mode-title">战略会议</h2>
+        <p class="mode-description">制定长期规划，明确发展方向</p>
+        <ul class="feature-list">
+          <li class="feature-item">SWOT分析工具</li>
+          <li class="feature-item">目标跟踪矩阵</li>
+          <li class="feature-item">决策支持系统</li>
+          <li class="feature-item">战略路线图</li>
+        </ul>
+        <button class="btn btn-primary">使用此模式</button>
+      </div>
+
+      <!-- 汇报演示 -->
+      <div class="mode-card">
+        <div class="mode-icon">📊</div>
+        <h2 class="mode-title">汇报演示</h2>
+        <p class="mode-description">展示工作成果，分享项目进展</p>
+        <ul class="feature-list">
+          <li class="feature-item">多媒体演示支持</li>
+          <li class="feature-item">实时互动问答</li>
+          <li class="feature-item">数据可视化工具</li>
+          <li class="feature-item">会议纪要自动生成</li>
+        </ul>
+        <button class="btn btn-primary">使用此模式</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

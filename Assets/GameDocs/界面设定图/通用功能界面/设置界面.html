@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>水浒 - FUK-U 系统设置</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    }
+    
+    body {
+      background: linear-gradient(45deg, #1A237E, #0288D1);
+      color: #FFFFFF;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1000px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      opacity: 0;
+      animation: fadeIn 0.5s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .header h1 {
+      font-size: 36px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+
+    .settings-nav {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .nav-item {
+      padding: 12px 24px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .nav-item:hover,
+    .nav-item.active {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      border-color: #00FFFF;
+    }
+
+    .settings-panel {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      padding: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      margin-bottom: 20px;
+      transform: translateY(20px);
+      opacity: 0;
+      animation: slideUp 0.5s ease forwards;
+    }
+
+    @keyframes slideUp {
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .setting-group {
+      margin-bottom: 30px;
+    }
+
+    .setting-group h3 {
+      font-size: 20px;
+      color: #00FFFF;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+    }
+
+    .setting-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .setting-item:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateX(5px);
+    }
+
+    .setting-label {
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .setting-control {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* 滑块样式 */
+    .slider {
+      -webkit-appearance: none;
+      width: 200px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 2px;
+      outline: none;
+    }
+
+    .slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      background: #00FFFF;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+
+    .slider::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+    }
+
+    /* 开关样式 */
+    .toggle {
+      position: relative;
+      width: 60px;
+      height: 30px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .toggle::before {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 26px;
+      height: 26px;
+      background: #FFFFFF;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+
+    .toggle.active {
+      background: #00FFFF;
+    }
+
+    .toggle.active::before {
+      transform: translateX(30px);
+    }
+
+    /* 下拉菜单样式 */
+    .select {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 5px;
+      padding: 8px 12px;
+      color: #FFFFFF;
+      outline: none;
+      cursor: pointer;
+      min-width: 150px;
+    }
+
+    .select option {
+      background: #1A237E;
+      color: #FFFFFF;
+    }
+
+    .action-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .btn {
+      padding: 12px 30px;
+      border-radius: 30px;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      color: #FFFFFF;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-primary {
+      background: linear-gradient(45deg, #0288D1, #00FFFF);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>系统设置</h1>
+    </div>
+
+    <div class="settings-nav">
+      <div class="nav-item active">游戏设置</div>
+      <div class="nav-item">画面设置</div>
+      <div class="nav-item">音频设置</div>
+      <div class="nav-item">操作设置</div>
+    </div>
+
+    <!-- 游戏设置面板 -->
+    <div class="settings-panel">
+      <div class="setting-group">
+        <h3>基础设置</h3>
+        <div class="setting-item">
+          <div class="setting-label">游戏难度</div>
+          <div class="setting-control">
+            <select class="select">
+              <option>简单</option>
+              <option>普通</option>
+              <option>困难</option>
+              <option>地狱</option>
+            </select>
+          </div>
+        </div>
+        <div class="setting-item">
+          <div class="setting-label">自动保存</div>
+          <div class="setting-control">
+            <div class="toggle active"></div>
+          </div>
+        </div>
+        <div class="setting-item">
+          <div class="setting-label">游戏提示</div>
+          <div class="setting-control">
+            <div class="toggle active"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="setting-group">
+        <h3>界面设置</h3>
+        <div class="setting-item">
+          <div class="setting-label">界面缩放</div>
+          <div class="setting-control">
+            <input type="range" class="slider" min="0" max="100" value="80">
+            <span>80%</span>
+          </div>
+        </div>
+        <div class="setting-item">
+          <div class="setting-label">显示伤害数字</div>
+          <div class="setting-control">
+            <div class="toggle active"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 画面设置面板 -->
+    <div class="settings-panel" style="display: none;">
+      <div class="setting-group">
+        <h3>画质设置</h3>
+        <div class="setting-item">
+          <div class="setting-label">画面品质</div>
+          <div class="setting-control">
+            <select class="select">
+              <option>最低</option>
+              <option>低</option>
+              <option>中</option>
+              <option>高</option>
+              <option>最高</option>
+            </select>
+          </div>
+        </div>
+        <div class="setting-item">
+          <div class="setting-label">分辨率</div>
+          <div class="setting-control">
+            <select class="select">
+              <option>1920x1080</option>
+              <option>2560x1440</option>
+              <option>3840x2160</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="setting-group">
+        <h3>特效设置</h3>
+        <div class="setting-item">
+          <div class="setting-label">粒子效果</div>
+          <div class="setting-control">
+            <input type="range" class="slider" min="0" max="100" value="90">
+            <span>90%</span>
+          </div>
+        </div>
+        <div class="setting-item">
+          <div class="setting-label">后期处理</div>
+          <div class="setting-control">
+            <div class="toggle active"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 音频设置面板 -->
+    <div class="settings-panel" style="display: none;">
+      <div class="setting-group">
+        <h3>音量设置</h3>
+        <div class="setting-item">
+          <div class="setting-label">主音量</div>
+          <div class="setting-control">
+            <input type="range" class="slider" min="0" max="100" value="75">
+            <span>75%</span>
+          </div>
+        </div>
+        <div class="setting-item">
+          <div class="setting-label">音乐音量</div>
+          <div class="setting-control">
+            <input type="range" class="slider" min="0" max="100" value="65">
+            <span>65%</span>
+          </div>
+        </div>
+        <div class="setting-item">
+          <div class="setting-label">音效音量</div>
+          <div class="setting-control">
+            <input type="range" class="slider" min="0" max="100" value="85">
+            <span>85%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="setting-group">
+        <h3>声音效果</h3>
+        <div class="setting-item">
+          <div class="setting-label">环境音效</div>
+          <div class="setting-control">
+            <div class="toggle active"></div>
+          </div>
+        </div>
+        <div class="setting-item">
+          <div class="setting-label">语音提示</div>
+          <div class="setting-control">
+            <div class="toggle"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 操作设置面板 -->
+    <div class="settings-panel" style="display: none;">
+      <div class="setting-group">
+        <h3>鼠标设置</h3>
+        <div class="setting-item">
+          <div class="setting-label">鼠标灵敏度</div>
+          <div class="setting-control">
+            <input type="range" class="slider" min="0" max="100" value="50">
+            <span>50%</span>
+          </div>
+        </div>
+        <div class="setting-item">
+          <div class="setting-label">鼠标加速</div>
+          <div class="setting-control">
+            <div class="toggle"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="setting-group">
+        <h3>按键设置</h3>
+        <div class="setting-item">
+          <div class="setting-label">使用卡牌</div>
+          <div class="setting-control">
+            <select class="select">
+              <option>左键点击</option>
+              <option>右

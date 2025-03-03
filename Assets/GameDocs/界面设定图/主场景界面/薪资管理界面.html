@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>薪资管理</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: #2C3333;
+      color: #A5C9CA;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background-color: rgba(57, 91, 100, 0.1);
+      border-radius: 12px;
+      padding: 24px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(165, 201, 202, 0.2);
+    }
+
+    .header {
+      margin-bottom: 32px;
+    }
+
+    .title {
+      font-size: 24px;
+      color: #00FFFF;
+      margin-bottom: 8px;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #A5C9CA;
+      opacity: 0.8;
+    }
+
+    .salary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .salary-card {
+      background: rgba(57, 91, 100, 0.2);
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid rgba(165, 201, 202, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .salary-card:hover {
+      transform: translateY(-2px);
+      border-color: #00FFFF;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+    }
+
+    .section-title {
+      font-size: 18px;
+      color: #00FFFF;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .salary-chart {
+      height: 200px;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .chart-item {
+      position: relative;
+      height: 40px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+    }
+
+    .chart-label {
+      width: 80px;
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    .chart-bar {
+      flex-grow: 1;
+      height: 24px;
+      background: rgba(0, 255, 255, 0.1);
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, rgba(0, 255, 255, 0.2), rgba(0, 255, 255, 0.4));
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+    }
+
+    .chart-value {
+      position: absolute;
+      right: 12px;
+      color: #00FFFF;
+      font-size: 12px;
+      line-height: 24px;
+    }
+
+    .bonus-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .bonus-item {
+      background: rgba(0, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    .bonus-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .bonus-type {
+      color: #00FFFF;
+      font-size: 14px;
+    }
+
+    .bonus-amount {
+      font-size: 14px;
+    }
+
+    .bonus-description {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    .negotiation-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .negotiation-item {
+      background: rgba(0, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    .negotiation-date {
+      font-size: 12px;
+      opacity: 0.8;
+      margin-bottom: 4px;
+    }
+
+    .negotiation-result {
+      font-size: 14px;
+      color: #00FFFF;
+      margin-bottom: 8px;
+    }
+
+    .negotiation-details {
+      font-size: 12px;
+      opacity: 0.8;
+      line-height: 1.4;
+    }
+
+    .btn {
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: none;
+      border: 1px solid;
+      color: inherit;
+      margin-top: 16px;
+    }
+
+    .btn-primary {
+      border-color: #00FFFF;
+      color: #00FFFF;
+    }
+
+    .btn-primary:hover {
+      background: rgba(0, 255, 255, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 class="title">薪资管理</h1>
+      <div class="subtitle">了解您的薪资组成和发展机会</div>
+    </div>
+
+    <div class="salary-grid">
+      <!-- 薪资构成 -->
+      <div class="salary-card">
+        <h2 class="section-title">薪资构成</h2>
+        <div class="salary-chart">
+          <div class="chart-item">
+            <div class="chart-label">基本工资</div>
+            <div class="chart-bar">
+              <div class="bar-fill" style="width: 100%"></div>
+              <span class="chart-value">15,000</span>
+            </div>
+          </div>
+          <div class="chart-item">
+            <div class="chart-label">绩效奖金</div>
+            <div class="chart-bar">
+              <div class="bar-fill" style="width: 60%"></div>
+              <span class="chart-value">9,000</span>
+            </div>
+          </div>
+          <div class="chart-item">
+            <div class="chart-label">项目奖金</div>
+            <div class="chart-bar">
+              <div class="bar-fill" style="width: 40%"></div>
+              <span class="chart-value">6,000</span>
+            </div>
+          </div>
+          <div class="chart-item">
+            <div class="chart-label">其他福利</div>
+            <div class="chart-bar">
+              <div class="bar-fill" style="width: 20%"></div>
+              <span class="chart-value">3,000</span>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-primary">查看详情</button>
+      </div>
+
+      <!-- 奖金细则 -->
+      <div class="salary-card">
+        <h2 class="section-title">奖金细则</h2>
+        <div class="bonus-list">
+          <div class="bonus-item">
+            <div class="bonus-header">
+              <span class="bonus-type">季度绩效奖</span>
+              <span class="bonus-amount">¥15,000</span>
+            </div>
+            <div class="bonus-description">基于季度KPI完成情况，最高可达基本工资的100%</div>
+          </div>
+          <div class="bonus-item">
+            <div class="bonus-header">
+              <span class="bonus-type">项目完成奖</span>
+              <span class="bonus-amount">¥8,000</span>
+            </div>
+            <div class="bonus-description">重点项目按时保质完成奖励</div>
+          </div>
+          <div class="bonus-item">
+            <div class="bonus-header">
+              <span class="bonus-type">创新激励奖</span>
+              <span class="bonus-amount">¥5,000</span>
+            </div>
+            <div class="bonus-description">技术创新或流程优化的特殊贡献奖励</div>
+          </div>
+        </div>
+        <button class="btn btn-primary">申请奖金</button>
+      </div>
+
+      <!-- 谈判记录 -->
+      <div class="salary-card">
+        <h2 class="section-title">谈判记录</h2>
+        <div class="negotiation-list">
+          <div class="negotiation-item">
+            <div class="negotiation-date">2024-01-15</div>
+            <div class="negotiation-result">基本工资上调 15%</div>
+            <div class="negotiation-details">基于过去半年的优秀表现，同意加薪请求。新工资将从下月起生效。</div>
+          </div>
+          <div class="negotiation-item">
+            <div class="negotiation-date">2023-07-20</div>
+            <div class="negotiation-result">项目奖金比例提升</div>
+            <div class="negotiation-details">重点项目奖金比例从10%提升至15%，以激励团队更好地完成项目目标。</div>
+          </div>
+        </div>
+        <button class="btn btn-primary">发起谈判</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

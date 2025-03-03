@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>工位装饰</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: #2C3333;
+      color: #A5C9CA;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background-color: rgba(57, 91, 100, 0.1);
+      border-radius: 12px;
+      padding: 24px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(165, 201, 202, 0.2);
+    }
+
+    .header {
+      margin-bottom: 32px;
+    }
+
+    .title {
+      font-size: 24px;
+      color: #00FFFF;
+      margin-bottom: 8px;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #A5C9CA;
+      opacity: 0.8;
+    }
+
+    .decor-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .decor-card {
+      background: rgba(57, 91, 100, 0.2);
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid rgba(165, 201, 202, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .decor-card:hover {
+      transform: translateY(-2px);
+      border-color: #00FFFF;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+    }
+
+    .section-title {
+      font-size: 18px;
+      color: #00FFFF;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .theme-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .theme-item {
+      background: rgba(0, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .theme-item:hover {
+      background: rgba(0, 255, 255, 0.1);
+    }
+
+    .theme-preview {
+      width: 100%;
+      height: 80px;
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+
+    .theme-name {
+      font-size: 14px;
+      color: #00FFFF;
+    }
+
+    .prop-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .prop-item {
+      background: rgba(0, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .prop-item:hover {
+      background: rgba(0, 255, 255, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .prop-icon {
+      font-size: 24px;
+      margin-bottom: 8px;
+      color: #00FFFF;
+    }
+
+    .prop-name {
+      font-size: 14px;
+    }
+
+    .effect-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .effect-item {
+      background: rgba(0, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .effect-item:hover {
+      background: rgba(0, 255, 255, 0.1);
+    }
+
+    .effect-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .effect-name {
+      color: #00FFFF;
+      font-size: 14px;
+    }
+
+    .effect-preview {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    .btn {
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: none;
+      border: 1px solid;
+      color: inherit;
+      margin-top: 16px;
+    }
+
+    .btn-primary {
+      border-color: #00FFFF;
+      color: #00FFFF;
+    }
+
+    .btn-primary:hover {
+      background: rgba(0, 255, 255, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 class="title">工位装饰</h1>
+      <div class="subtitle">打造独特的个人工作空间</div>
+    </div>
+
+    <div class="decor-grid">
+      <!-- 主题更换 -->
+      <div class="decor-card">
+        <h2 class="section-title">主题更换</h2>
+        <div class="theme-grid">
+          <div class="theme-item">
+            <div class="theme-preview" style="background: linear-gradient(45deg, #00FFFF, #39FF14)"></div>
+            <div class="theme-name">霓虹主题</div>
+          </div>
+          <div class="theme-item">
+            <div class="theme-preview" style="background: linear-gradient(45deg, #FF00FF, #00FFFF)"></div>
+            <div class="theme-name">赛博朋克</div>
+          </div>
+          <div class="theme-item">
+            <div class="theme-preview" style="background: linear-gradient(45deg, #FFD700, #FFA500)"></div>
+            <div class="theme-name">黄金时代</div>
+          </div>
+          <div class="theme-item">
+            <div class="theme-preview" style="background: linear-gradient(45deg, #4B0082, #8A2BE2)"></div>
+            <div class="theme-name">深邃星空</div>
+          </div>
+        </div>
+        <button class="btn btn-primary">应用主题</button>
+      </div>
+
+      <!-- 装饰道具 -->
+      <div class="decor-card">
+        <h2 class="section-title">装饰道具</h2>
+        <div class="prop-list">
+          <div class="prop-item">
+            <div class="prop-icon">🌿</div>
+            <div class="prop-name">盆栽</div>
+          </div>
+          <div class="prop-item">
+            <div class="prop-icon">💡</div>
+            <div class="prop-name">台灯</div>
+          </div>
+          <div class="prop-item">
+            <div class="prop-icon">📚</div>
+            <div class="prop-name">书架</div>
+          </div>
+          <div class="prop-item">
+            <div class="prop-icon">🖼️</div>
+            <div class="prop-name">装饰画</div>
+          </div>
+          <div class="prop-item">
+            <div class="prop-icon">☕</div>
+            <div class="prop-name">咖啡杯</div>
+          </div>
+          <div class="prop-item">
+            <div class="prop-icon">🎮</div>
+            <div class="prop-name">小玩具</div>
+          </div>
+        </div>
+        <button class="btn btn-primary">购买道具</button>
+      </div>
+
+      <!-- 特效选择 -->
+      <div class="decor-card">
+        <h2 class="section-title">特效选择</h2>
+        <div class="effect-list">
+          <div class="effect-item">
+            <div class="effect-header">
+              <span class="effect-name">霓虹光环</span>
+            </div>
+            <div class="effect-preview">为工位添加炫酷的霓虹光环效果</div>
+          </div>
+          <div class="effect-item">
+            <div class="effect-header">
+              <span class="effect-name">粒子特效</span>
+            </div>
+            <div class="effect-preview">在工位周围显示动态粒子效果</div>
+          </div>
+          <div class="effect-item">
+            <div class="effect-header">
+              <span class="effect-name">全息投影</span>
+            </div>
+            <div class="effect-preview">在工位上方显示全息投影效果</div>
+          </div>
+        </div>
+        <button class="btn btn-primary">应用特效</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

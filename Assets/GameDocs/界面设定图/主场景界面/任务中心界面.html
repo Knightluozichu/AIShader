@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>任务中心</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: #2C3333;
+      color: #A5C9CA;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background-color: rgba(57, 91, 100, 0.1);
+      border-radius: 12px;
+      padding: 24px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(165, 201, 202, 0.2);
+    }
+
+    .header {
+      margin-bottom: 32px;
+    }
+
+    .title {
+      font-size: 24px;
+      color: #00FFFF;
+      margin-bottom: 8px;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #A5C9CA;
+      opacity: 0.8;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+      border-bottom: 2px solid rgba(0, 255, 255, 0.1);
+      padding-bottom: 8px;
+    }
+
+    .tab {
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .tab.active {
+      background: rgba(0, 255, 255, 0.1);
+      color: #00FFFF;
+    }
+
+    .tab.active::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: #00FFFF;
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+
+    .task-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .task-card {
+      background: rgba(57, 91, 100, 0.2);
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid rgba(165, 201, 202, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .task-card:hover {
+      transform: translateY(-2px);
+      border-color: #00FFFF;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+    }
+
+    .task-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .task-type {
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      background: rgba(0, 255, 255, 0.1);
+      color: #00FFFF;
+    }
+
+    .task-status {
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+
+    .status-new {
+      background: rgba(76, 217, 100, 0.1);
+      color: #4CD964;
+    }
+
+    .status-in-progress {
+      background: rgba(255, 187, 51, 0.1);
+      color: #FFBB33;
+    }
+
+    .status-completed {
+      background: rgba(90, 200, 250, 0.1);
+      color: #5AC8FA;
+    }
+
+    .task-title {
+      font-size: 16px;
+      margin-bottom: 8px;
+      color: #00FFFF;
+    }
+
+    .task-description {
+      font-size: 14px;
+      margin-bottom: 16px;
+      opacity: 0.8;
+      line-height: 1.5;
+    }
+
+    .task-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    .task-reward {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .task-deadline {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .btn {
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: none;
+      border: 1px solid;
+      color: inherit;
+    }
+
+    .btn-primary {
+      border-color: #00FFFF;
+      color: #00FFFF;
+    }
+
+    .btn-primary:hover {
+      background: rgba(0, 255, 255, 0.1);
+    }
+
+    .btn-secondary {
+      border-color: #A5C9CA;
+      color: #A5C9CA;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(165, 201, 202, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 class="title">任务中心</h1>
+      <div class="subtitle">探索任务，获取奖励</div>
+    </div>
+
+    <div class="tabs">
+      <div class="tab active">接收新任务</div>
+      <div class="tab">提交任务</div>
+      <div class="tab">任务历史</div>
+    </div>
+
+    <div class="task-grid">
+      <!-- 新任务卡片 -->
+      <div class="task-card">
+        <div class="task-header">
+          <span class="task-type">日常任务</span>
+          <span class="task-status status-new">可接取</span>
+        </div>
+        <h3 class="task-title">优化代码性能</h3>
+        <p class="task-description">优化现有代码库中的性能瓶颈，提升系统运行效率。重点关注数据处理和渲染部分。</p>
+        <div class="task-meta">
+          <div class="task-reward">🏆 奖励: 500 积分</div>
+          <div class="task-deadline">⏰ 截止时间: 3天</div>
+        </div>
+        <div class="action-buttons">
+          <button class="btn btn-primary">接受任务</button>
+          <button class="btn btn-secondary">查看详情</button>
+        </div>
+      </div>
+
+      <!-- 进行中任务卡片 -->
+      <div class="task-card">
+        <div class="task-header">
+          <span class="task-type">项目任务</span>
+          <span class="task-status status-in-progress">进行中</span>
+        </div>
+        <h3 class="task-title">实现新功能模块</h3>
+        <p class="task-description">开发用户反馈系统的核心功能，包括数据收集、分析和可视化展示。</p>
+        <div class="task-meta">
+          <div class="task-reward">🏆 奖励: 800 积分</div>
+          <div class="task-deadline">⏰ 剩余时间: 5天</div>
+        </div>
+        <div class="action-buttons">
+          <button class="btn btn-primary">提交任务</button>
+          <button class="btn btn-secondary">查看进度</button>
+        </div>
+      </div>
+
+      <!-- 已完成任务卡片 -->
+      <div class="task-card">
+        <div class="task-header">
+          <span class="task-type">周常任务</span>
+          <span class="task-status status-completed">已完成</span>
+        </div>
+        <h3 class="task-title">编写技术文档</h3>
+        <p class="task-description">完成新功能模块的技术文档编写，包括架构设计、接口说明和使用示例。</p>
+        <div class="task-meta">
+          <div class="task-reward">🏆 已获得: 300 积分</div>
+          <div class="task-deadline">✅ 按时完成</div>
+        </div>
+        <div class="action-buttons">
+          <button class="btn btn-secondary">查看评价</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

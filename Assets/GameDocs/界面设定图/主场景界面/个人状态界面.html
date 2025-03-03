@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>个人状态</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: #2C3333;
+      color: #A5C9CA;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background-color: rgba(57, 91, 100, 0.1);
+      border-radius: 12px;
+      padding: 24px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(165, 201, 202, 0.2);
+    }
+
+    .header {
+      margin-bottom: 32px;
+    }
+
+    .title {
+      font-size: 24px;
+      color: #00FFFF;
+      margin-bottom: 8px;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #A5C9CA;
+      opacity: 0.8;
+    }
+
+    .status-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .status-card {
+      background: rgba(57, 91, 100, 0.2);
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid rgba(165, 201, 202, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .status-card:hover {
+      transform: translateY(-2px);
+      border-color: #00FFFF;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+    }
+
+    .section-title {
+      font-size: 18px;
+      color: #00FFFF;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .status-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .status-item {
+      background: rgba(0, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .status-item:hover {
+      background: rgba(0, 255, 255, 0.1);
+    }
+
+    .status-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .status-name {
+      color: #00FFFF;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .status-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .status-online {
+      background: #39FF14;
+    }
+
+    .status-busy {
+      background: #FF3B30;
+    }
+
+    .status-away {
+      background: #FFD700;
+    }
+
+    .mode-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .mode-item {
+      background: rgba(0, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .mode-item:hover {
+      background: rgba(0, 255, 255, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .mode-item.active {
+      border: 1px solid #00FFFF;
+      background: rgba(0, 255, 255, 0.1);
+    }
+
+    .mode-icon {
+      font-size: 24px;
+      margin-bottom: 8px;
+      color: #00FFFF;
+    }
+
+    .mode-name {
+      font-size: 14px;
+    }
+
+    .timer-display {
+      font-size: 32px;
+      color: #00FFFF;
+      text-align: center;
+      margin: 20px 0;
+      font-family: monospace;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+
+    .btn {
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: none;
+      border: 1px solid;
+      color: inherit;
+      margin-top: 16px;
+    }
+
+    .btn-primary {
+      border-color: #00FFFF;
+      color: #00FFFF;
+    }
+
+    .btn-primary:hover {
+      background: rgba(0, 255, 255, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 class="title">个人状态</h1>
+      <div class="subtitle">管理你的在线状态和工作模式</div>
+    </div>
+
+    <div class="status-grid">
+      <!-- 在线状态 -->
+      <div class="status-card">
+        <h2 class="section-title">在线状态</h2>
+        <div class="status-list">
+          <div class="status-item">
+            <div class="status-header">
+              <span class="status-name">
+                <span class="status-indicator status-online"></span>
+                在线
+              </span>
+            </div>
+          </div>
+          <div class="status-item">
+            <div class="status-header">
+              <span class="status-name">
+                <span class="status-indicator status-busy"></span>
+                忙碌
+              </span>
+            </div>
+          </div>
+          <div class="status-item">
+            <div class="status-header">
+              <span class="status-name">
+                <span class="status-indicator status-away"></span>
+                离开
+              </span>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-primary">更新状态</button>
+      </div>
+
+      <!-- 工作模式 -->
+      <div class="status-card">
+        <h2 class="section-title">工作模式</h2>
+        <div class="mode-list">
+          <div class="mode-item active">
+            <div class="mode-icon">💻</div>
+            <div class="mode-name">专注模式</div>
+          </div>
+          <div class="mode-item">
+            <div class="mode-icon">🤝</div>
+            <div class="mode-name">协作模式</div>
+          </div>
+          <div class="mode-item">
+            <div class="mode-icon">🎯</div>
+            <div class="mode-name">目标模式</div>
+          </div>
+          <div class="mode-item">
+            <div class="mode-icon">🔄</div>
+            <div class="mode-name">灵活模式</div>
+          </div>
+        </div>
+        <button class="btn btn-primary">切换模式</button>
+      </div>
+
+      <!-- 休息提醒 -->
+      <div class="status-card">
+        <h2 class="section-title">休息提醒</h2>
+        <div class="timer-display">25:00</div>
+        <div class="status-list">
+          <div class="status-item">
+            <div class="status-header">
+              <span class="status-name">下次休息</span>
+              <span>15:30</span>
+            </div>
+          </div>
+          <div class="status-item">
+            <div class="status-header">
+              <span class="status-name">休息时长</span>
+              <span>5分钟</span>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-primary">开始计时</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

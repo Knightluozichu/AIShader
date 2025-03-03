@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>八卦论坛</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: #2C3333;
+      color: #A5C9CA;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background-color: rgba(57, 91, 100, 0.1);
+      border-radius: 12px;
+      padding: 24px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(165, 201, 202, 0.2);
+    }
+
+    .header {
+      margin-bottom: 32px;
+    }
+
+    .title {
+      font-size: 24px;
+      color: #00FFFF;
+      margin-bottom: 8px;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #A5C9CA;
+      opacity: 0.8;
+    }
+
+    .forum-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 24px;
+    }
+
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .post-card {
+      background: rgba(57, 91, 100, 0.2);
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid rgba(165, 201, 202, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .post-card:hover {
+      transform: translateY(-2px);
+      border-color: #00FFFF;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+    }
+
+    .post-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .post-title {
+      font-size: 18px;
+      color: #00FFFF;
+    }
+
+    .post-meta {
+      font-size: 12px;
+      opacity: 0.8;
+      display: flex;
+      gap: 16px;
+    }
+
+    .post-content {
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .post-actions {
+      display: flex;
+      gap: 16px;
+      font-size: 14px;
+    }
+
+    .action-button {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: #A5C9CA;
+    }
+
+    .action-button:hover {
+      color: #00FFFF;
+    }
+
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .create-post {
+      background: rgba(0, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid rgba(0, 255, 255, 0.2);
+    }
+
+    .create-post-button {
+      width: 100%;
+      padding: 12px;
+      background: rgba(0, 255, 255, 0.2);
+      border: 1px solid rgba(0, 255, 255, 0.4);
+      border-radius: 8px;
+      color: #00FFFF;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .create-post-button:hover {
+      background: rgba(0, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .poll-card {
+      background: rgba(57, 91, 100, 0.2);
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid rgba(165, 201, 202, 0.1);
+    }
+
+    .poll-title {
+      font-size: 16px;
+      color: #00FFFF;
+      margin-bottom: 16px;
+    }
+
+    .poll-options {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .poll-option {
+      background: rgba(0, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .poll-option:hover {
+      background: rgba(0, 255, 255, 0.1);
+    }
+
+    .poll-progress {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      background: rgba(0, 255, 255, 0.1);
+      z-index: 0;
+    }
+
+    .poll-text {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .poll-count {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    .trending-topics {
+      background: rgba(57, 91, 100, 0.2);
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid rgba(165, 201, 202, 0.1);
+    }
+
+    .topic-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .topic-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      padding: 8px;
+      border-radius: 6px;
+    }
+
+    .topic-item:hover {
+      background: rgba(0, 255, 255, 0.1);
+    }
+
+    .topic-hash {
+      color: #00FFFF;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 class="title">八卦论坛</h1>
+      <div class="subtitle">分享趣闻，交流八卦</div>
+    </div>
+
+    <div class="forum-grid">
+      <div class="main-content">
+        <div class="post-card">
+          <div class="post-header">
+            <h2 class="post-title">公司新来的实习生居然是CEO的侄子？！</h2>
+            <div class="post-meta">
+              <span>匿名用户</span>
+              <span>10分钟前</span>
+            </div>
+          </div>
+          <div class="post-content">
+            听说新来的实习生背景很深，据说是CEO的亲戚。大家有什么内幕消息吗？
+          </div>
+          <div class="post-actions">
+            <div class="action-button">👍 赞同 (45)</div>
+            <div class="action-button">💬 评论 (23)</div>
+            <div class="action-button">🔄 分享</div>
+          </div>
+        </div>
+
+        <div class="post-card">
+          <div class="post-header">
+            <h2 class="post-title">食堂要换新供应商了！</h2>
+            <div class="post-meta">
+              <span>吃货小分队</span>
+              <span>30分钟前</span>
+            </div>
+          </div>
+          <div class="post-content">
+            听说下个月食堂要换新供应商，据说是米其林大厨团队！期待值拉满！
+          </div>
+          <div class="post-actions">
+            <div class="action-button">👍 赞同 (67)</div>
+            <div class="action-button">💬 评论 (34)</div>
+            <div class="action-button">🔄 分享</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar">
+        <div class="create-post">
+          <button class="create-post-button">发布新帖子</button>
+        </div>
+
+        <div class="poll-card">
+          <h3 class="poll-title">你最期待公司年会的哪个环节？</h3>
+          <div class="poll-options">
+            <div class="poll-option">
+              <div class="poll-progress" style="width: 65%"></div>
+              <div class="poll-text">
+                <span>抽奖环节</span>
+                <span class="poll-count">65%</span>
+              </div>
+            </div>
+            <div class="poll-option">
+              <div class="poll-progress" style="width: 20%"></div>
+              <div class="poll-text">
+                <span>文艺表演</span>
+                <span class="poll-count">20%</span>
+              </div>
+            </div>
+            <div class="poll-option">
+              <div class="poll-progress" style="width: 15%"></div>
+              <div class="poll-text">
+                <span>领导致辞</span>
+                <span class="poll-count">15%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="trending-topics">
+          <h3 class="poll-title">热门话题</h3>
+          <div class="topic-list">
+            <div class="topic-item">
+              <span class="topic-hash">#</span>
+              <span>年终奖金</span>
+            </div>
+            <div class="topic-item">
+              <span class="topic-hash">#</span>
+              <span>新办公室装修</span>
+            </div>
+            <div class="topic-item">
+              <span class="topic-hash">#</span>
+              <span>团建活动</span>
+            </div>
+            <div class="topic-item">
+              <span class="topic-hash">#</span>
+              <span>加班文化</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

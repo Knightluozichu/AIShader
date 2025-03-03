@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>奖励兑换</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: #2C3333;
+      color: #A5C9CA;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background-color: rgba(57, 91, 100, 0.1);
+      border-radius: 12px;
+      padding: 24px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(165, 201, 202, 0.2);
+    }
+
+    .header {
+      margin-bottom: 32px;
+    }
+
+    .title {
+      font-size: 24px;
+      color: #00FFFF;
+      margin-bottom: 8px;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #A5C9CA;
+      opacity: 0.8;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+      border-bottom: 2px solid rgba(0, 255, 255, 0.1);
+      padding-bottom: 8px;
+    }
+
+    .tab {
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .tab.active {
+      background: rgba(0, 255, 255, 0.1);
+      color: #00FFFF;
+    }
+
+    .tab.active::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: #00FFFF;
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+
+    .reward-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .reward-card {
+      background: rgba(57, 91, 100, 0.2);
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid rgba(165, 201, 202, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .reward-card:hover {
+      transform: translateY(-2px);
+      border-color: #00FFFF;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+    }
+
+    .reward-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .reward-type {
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      background: rgba(0, 255, 255, 0.1);
+      color: #00FFFF;
+    }
+
+    .reward-status {
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+
+    .status-available {
+      background: rgba(76, 217, 100, 0.1);
+      color: #4CD964;
+    }
+
+    .status-claimed {
+      background: rgba(90, 200, 250, 0.1);
+      color: #5AC8FA;
+    }
+
+    .status-locked {
+      background: rgba(255, 76, 76, 0.1);
+      color: #FF4C4C;
+    }
+
+    .reward-title {
+      font-size: 16px;
+      margin-bottom: 8px;
+      color: #00FFFF;
+    }
+
+    .reward-description {
+      font-size: 14px;
+      margin-bottom: 16px;
+      opacity: 0.8;
+      line-height: 1.5;
+    }
+
+    .reward-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    .reward-points {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .reward-expiry {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .achievement-progress {
+      margin-top: 12px;
+    }
+
+    .progress-bar {
+      height: 4px;
+      background: rgba(165, 201, 202, 0.1);
+      border-radius: 2px;
+      margin-top: 8px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #00FFFF, #39FF14);
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .btn {
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: none;
+      border: 1px solid;
+      color: inherit;
+      width: 100%;
+    }
+
+    .btn-primary {
+      border-color: #00FFFF;
+      color: #00FFFF;
+    }
+
+    .btn-primary:hover {
+      background: rgba(0, 255, 255, 0.1);
+    }
+
+    .btn-secondary {
+      border-color: #A5C9CA;
+      color: #A5C9CA;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(165, 201, 202, 0.1);
+    }
+
+    .btn-disabled {
+      border-color: rgba(165, 201, 202, 0.3);
+      color: rgba(165, 201, 202, 0.3);
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 class="title">奖励兑换</h1>
+      <div class="subtitle">解锁成就，获取奖励</div>
+    </div>
+
+    <div class="tabs">
+      <div class="tab active">可领取奖励</div>
+      <div class="tab">奖励记录</div>
+      <div class="tab">特殊成就</div>
+    </div>
+
+    <div class="reward-grid">
+      <!-- 可领取奖励卡片 -->
+      <div class="reward-card">
+        <div class="reward-header">
+          <span class="reward-type">限时奖励</span>
+          <span class="reward-status status-available">可领取</span>
+        </div>
+        <h3 class="reward-title">高级开发工具包</h3>
+        <p class="reward-description">包含专业IDE授权、代码分析工具和性能优化套件。</p>
+        <div class="reward-meta">
+          <div class="reward-points">💎 所需积分: 1000</div>
+          <div class="reward-expiry">⏰ 剩余: 2天</div>
+        </div>
+        <div class="action-buttons">
+          <button class="btn btn-primary">立即兑换</button>
+        </div>
+      </div>
+
+      <!-- 已领取奖励卡片 -->
+      <div class="reward-card">
+        <div class="reward-header">
+          <span class="reward-type">成就奖励</span>
+          <span class="reward-status status-claimed">已领取</span>
+        </div>
+        <h3 class="reward-title">技术先锋勋章</h3>
+        <p class="reward-description">完成50个高难度任务的荣誉象征，可用于个人资料展示。</p>
+        <div class="reward-meta">
+          <div class="reward-points">🏆 成就点数: 500</div>
+          <div class="reward-expiry">✅ 永久有效</div>
+        </div>
+        <div class="action-buttons">
+          <button class="btn btn-secondary">查看详情</button>
+        </div>
+      </div>
+
+      <!-- 特殊成就卡片 -->
+      <div class="reward-card">
+        <div class="reward-header">
+          <span class="reward-type">特殊成就</span>
+          <span class="reward-status status-locked">进行中</span>
+        </div>
+        <h3 class="reward-title">全栈大师</h3>
+        <p class="reward-description">完成前端、后端和数据库相关的所有核心任务。</p>
+        <div class="achievement-progress">
+          <div class="reward-meta">
+            <div class="reward-points">🎯 进度: 15/20</div>
+            <div>75%</div>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 75%"></div>
+          </div>
+        </div>
+        <div class="action-buttons">
+          <button class="btn btn-disabled">未达成</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

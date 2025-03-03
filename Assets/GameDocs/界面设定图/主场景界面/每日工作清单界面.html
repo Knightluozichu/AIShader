@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>每日工作清单</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: #2C3333;
+      color: #A5C9CA;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background-color: rgba(57, 91, 100, 0.1);
+      border-radius: 12px;
+      padding: 24px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(165, 201, 202, 0.2);
+    }
+
+    .header {
+      margin-bottom: 32px;
+    }
+
+    .title {
+      font-size: 24px;
+      color: #00FFFF;
+      margin-bottom: 8px;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+
+    .date {
+      font-size: 14px;
+      color: #A5C9CA;
+      opacity: 0.8;
+    }
+
+    .task-columns {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .task-column {
+      background: rgba(57, 91, 100, 0.2);
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid rgba(165, 201, 202, 0.1);
+    }
+
+    .column-header {
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid rgba(0, 255, 255, 0.1);
+    }
+
+    .column-title {
+      font-size: 18px;
+      color: #00FFFF;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .task-count {
+      font-size: 14px;
+      background: rgba(0, 255, 255, 0.1);
+      padding: 2px 8px;
+      border-radius: 12px;
+    }
+
+    .task-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .task-card {
+      background: rgba(57, 91, 100, 0.3);
+      border-radius: 8px;
+      padding: 16px;
+      border: 1px solid rgba(165, 201, 202, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .task-card:hover {
+      transform: translateY(-2px);
+      border-color: #00FFFF;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+    }
+
+    .task-priority {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+
+    .priority-high {
+      background: rgba(255, 76, 76, 0.1);
+      color: #FF4C4C;
+    }
+
+    .priority-medium {
+      background: rgba(255, 187, 51, 0.1);
+      color: #FFBB33;
+    }
+
+    .priority-low {
+      background: rgba(76, 217, 100, 0.1);
+      color: #4CD964;
+    }
+
+    .task-name {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .task-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: #A5C9CA;
+      opacity: 0.8;
+    }
+
+    .task-deadline {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .progress-bar {
+      height: 4px;
+      background: rgba(165, 201, 202, 0.1);
+      border-radius: 2px;
+      margin-top: 8px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #00FFFF, #39FF14);
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 class="title">每日工作清单</h1>
+      <div class="date">2024年1月1日 星期一</div>
+    </div>
+
+    <div class="task-columns">
+      <!-- 待处理任务 -->
+      <div class="task-column">
+        <div class="column-header">
+          <div class="column-title">
+            待处理任务
+            <span class="task-count">3</span>
+          </div>
+        </div>
+        <div class="task-list">
+          <div class="task-card">
+            <div class="task-priority priority-high">高优先级</div>
+            <div class="task-name">完成项目提案</div>
+            <div class="task-meta">
+              <div class="task-deadline">🕒 今天 14:00</div>
+              <div>@产品部</div>
+            </div>
+          </div>
+          <div class="task-card">
+            <div class="task-priority priority-medium">中优先级</div>
+            <div class="task-name">客户需求分析</div>
+            <div class="task-meta">
+              <div class="task-deadline">🕒 今天 16:00</div>
+              <div>@市场部</div>
+            </div>
+          </div>
+          <div class="task-card">
+            <div class="task-priority priority-low">低优先级</div>
+            <div class="task-name">团队周会准备</div>
+            <div class="task-meta">
+              <div class="task-deadline">🕒 明天 10:00</div>
+              <div>@全体</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 进行中任务 -->
+      <div class="task-column">
+        <div class="column-header">
+          <div class="column-title">
+            进行中任务
+            <span class="task-count">2</span>
+          </div>
+        </div>
+        <div class="task-list">
+          <div class="task-card">
+            <div class="task-priority priority-high">高优先级</div>
+            <div class="task-name">用户界面设计</div>
+            <div class="task-meta">
+              <div class="task-deadline">🕒 今天 18:00</div>
+              <div>@设计部</div>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 60%"></div>
+            </div>
+          </div>
+          <div class="task-card">
+            <div class="task-priority priority-medium">中优先级</div>
+            <div class="task-name">代码重构</div>
+            <div class="task-meta">
+              <div class="task-deadline">🕒 明天 12:00</div>
+              <div>@技术部</div>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 30%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 已完成任务 -->
+      <div class="task-column">
+        <div class="column-header">
+          <div class="column-title">
+            已完成任务
+            <span class="task-count">2</span>
+          </div>
+        </div>
+        <div class="task-list">
+          <div class="task-card">
+            <div class="task-priority priority-high">高优先级</div>
+            <div class="task-name">数据库优化</div>
+            <div class="task-meta">
+              <div>✅ 已完成</div>
+              <div>@技术部</div>
+            </div>
+          </div>
+          <div class="task-card">
+            <div class="task-priority priority-medium">中优先级</div>
+            <div class="task-name">周报整理</div>
+            <div class="task-meta">
+              <div>✅ 已完成</div>
+              <div>@管理部</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

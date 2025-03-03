@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>快捷工具界面</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: #2C3333;
+      color: #A5C9CA;
+      padding: 20px;
+    }
+
+    .quick-tools {
+      max-width: 1200px;
+      margin: 0 auto;
+      background-color: rgba(57, 91, 100, 0.1);
+      border-radius: 12px;
+      padding: 24px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(165, 201, 202, 0.2);
+    }
+
+    .section {
+      margin-bottom: 32px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      margin-bottom: 16px;
+      color: #00FFFF;
+      display: flex;
+      align-items: center;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+
+    .section-title::before {
+      content: '';
+      width: 4px;
+      height: 24px;
+      background: linear-gradient(to bottom, #00FFFF, #39FF14);
+      margin-right: 12px;
+      border-radius: 2px;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .tool-card {
+      background: rgba(57, 91, 100, 0.2);
+      border-radius: 8px;
+      padding: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(165, 201, 202, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tool-card:hover {
+      transform: translateY(-2px);
+      border-color: #00FFFF;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+    }
+
+    .tool-card:hover::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+      animation: shine 1.5s infinite;
+    }
+
+    .tool-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 26, 117, 0.1);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+      color: #FF1A75;
+      font-size: 20px;
+    }
+
+    .tool-name {
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+
+    .tool-desc {
+      font-size: 12px;
+      color: #A5C9CA;
+      opacity: 0.8;
+    }
+
+    .recent-item {
+      display: flex;
+      align-items: center;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      background: rgba(57, 91, 100, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .recent-item:hover {
+      background: rgba(57, 91, 100, 0.3);
+      transform: translateX(4px);
+    }
+
+    .recent-icon {
+      width: 32px;
+      height: 32px;
+      background: rgba(57, 244, 20, 0.1);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 12px;
+      color: #39FF14;
+    }
+
+    .recent-info {
+      flex: 1;
+    }
+
+    .recent-name {
+      font-size: 14px;
+      margin-bottom: 2px;
+    }
+
+    .recent-time {
+      font-size: 12px;
+      color: #A5C9CA;
+      opacity: 0.6;
+    }
+
+    @keyframes shine {
+      0% {
+        transform: translateX(-100%);
+      }
+      100% {
+        transform: translateX(100%);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="quick-tools">
+    <!-- 常用功能入口 -->
+    <div class="section">
+      <div class="section-title">常用功能入口</div>
+      <div class="card-grid">
+        <div class="tool-card">
+          <div class="tool-icon">⚔️</div>
+          <div class="tool-name">战斗训练</div>
+          <div class="tool-desc">提升战斗技能</div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-icon">💼</div>
+          <div class="tool-name">职场任务</div>
+          <div class="tool-desc">完成日常工作</div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-icon">🏢</div>
+          <div class="tool-name">办公室政治</div>
+          <div class="tool-desc">处理人际关系</div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-icon">📈</div>
+          <div class="tool-name">数据分析</div>
+          <div class="tool-desc">查看个人数据</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 收藏夹 -->
+    <div class="section">
+      <div class="section-title">收藏夹</div>
+      <div class="card-grid">
+        <div class="tool-card">
+          <div class="tool-icon">⭐️</div>
+          <div class="tool-name">技能升级</div>
+          <div class="tool-desc">自定义收藏1</div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-icon">⭐️</div>
+          <div class="tool-name">装备强化</div>
+          <div class="tool-desc">自定义收藏2</div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-icon">⭐️</div>
+          <div class="tool-name">社交关系</div>
+          <div class="tool-desc">自定义收藏3</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 最近访问 -->
+    <div class="section">
+      <div class="section-title">最近访问</div>
+      <div class="recent-list">
+        <div class="recent-item">
+          <div class="recent-icon">🕒</div>
+          <div class="recent-info">
+            <div class="recent-name">战斗训练</div>
+            <div class="recent-time">10分钟前</div>
+          </div>
+        </div>
+        <div class="recent-item">
+          <div class="recent-icon">🕒</div>
+          <div class="recent-info">
+            <div class="recent-name">职场任务</div>
+            <div class="recent-time">30分钟前</div>
+          </div>
+        </div>
+        <div class="recent-item">
+          <div class="recent-icon">🕒</div>
+          <div class="recent-info">
+            <div class="recent-name">数据分析</div>
+            <div class="recent-time">2小时前</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

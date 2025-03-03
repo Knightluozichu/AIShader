@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OKR追踪界面</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: #2C3333;
+      color: #A5C9CA;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background-color: rgba(57, 91, 100, 0.1);
+      border-radius: 12px;
+      padding: 24px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(165, 201, 202, 0.2);
+    }
+
+    .header {
+      margin-bottom: 32px;
+    }
+
+    .title {
+      font-size: 24px;
+      color: #00FFFF;
+      margin-bottom: 8px;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #A5C9CA;
+      opacity: 0.8;
+    }
+
+    .section {
+      background: rgba(57, 91, 100, 0.2);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 24px;
+      border: 1px solid rgba(165, 201, 202, 0.1);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      color: #00FFFF;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .progress-circle {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: conic-gradient(#00FFFF 70%, rgba(0, 255, 255, 0.1) 0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .progress-circle::before {
+      content: '';
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background: rgba(57, 91, 100, 0.2);
+      border-radius: 50%;
+    }
+
+    .progress-value {
+      position: relative;
+      font-size: 24px;
+      font-weight: bold;
+      color: #00FFFF;
+    }
+
+    .key-results {
+      display: grid;
+      gap: 16px;
+    }
+
+    .kr-card {
+      background: rgba(57, 91, 100, 0.3);
+      border-radius: 8px;
+      padding: 16px;
+      border: 1px solid rgba(165, 201, 202, 0.1);
+    }
+
+    .kr-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .kr-title {
+      font-size: 16px;
+      color: #E0E0E0;
+    }
+
+    .kr-progress {
+      font-size: 14px;
+      color: #00FFFF;
+    }
+
+    .progress-bar {
+      height: 4px;
+      background: rgba(165, 201, 202, 0.1);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #00FFFF, #39FF14);
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+
+    .report-card {
+      background: rgba(57, 91, 100, 0.3);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(165, 201, 202, 0.1);
+    }
+
+    .report-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .report-date {
+      font-size: 14px;
+      color: #A5C9CA;
+      opacity: 0.8;
+    }
+
+    .report-status {
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      background: rgba(0, 255, 255, 0.1);
+      color: #00FFFF;
+    }
+
+    .report-content {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #E0E0E0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 class="title">OKR追踪</h1>
+      <div class="subtitle">2024年第一季度</div>
+    </div>
+
+    <!-- 目标完成度 -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-title">目标完成度</div>
+      </div>
+      <div style="display: flex; gap: 24px; align-items: center;">
+        <div class="progress-circle">
+          <div class="progress-value">70%</div>
+        </div>
+        <div>
+          <h3 style="margin-bottom: 8px; color: #E0E0E0;">提升团队工作效率</h3>
+          <p style="font-size: 14px; color: #A5C9CA;">计划完成时间：2024年3月31日</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 关键结果 -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-title">关键结果</div>
+      </div>
+      <div class="key-results">
+        <div class="kr-card">
+          <div class="kr-header">
+            <div class="kr-title">将项目交付时间缩短20%</div>
+            <div class="kr-progress">80%</div>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 80%"></div>
+          </div>
+        </div>
+        <div class="kr-card">
+          <div class="kr-header">
+            <div class="kr-title">提高团队协作效率30%</div>
+            <div class="kr-progress">65%</div>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 65%"></div>
+          </div>
+        </div>
+        <div class="kr-card">
+          <div class="kr-header">
+            <div class="kr-title">减少50%的会议时间</div>
+            <div class="kr-progress">45%</div>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 45%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 进度报告 -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-title">进度报告</div>
+      </div>
+      <div class="report-card">
+        <div class="report-header">
+          <div class="report-date">2024年1月15日</div>
+          <div class="report-status">按计划进行</div>
+        </div>
+        <div class="report-content">
+          本周通过优化工作流程，项目交付时间减少15%。团队协作效率提升显著，新的协作工具使用情况良好。会议时间控制在预期范围内，重点关注项目里程碑的达成。
+        </div>
+      </div>
+      <div class="report-card">
+        <div class="report-header">
+          <div class="report-date">2024年1月8日</div>
+          <div class="report-status">需要关注</div>
+        </div>
+        <div class="report-content">
+          会议时间减少进度不及预期，需要进一步优化会议结构。其他指标进展顺利，团队反馈积极。下周将重点解决会议效率问题。
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

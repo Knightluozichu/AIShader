@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>茶水间情报</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: #2C3333;
+      color: #A5C9CA;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background-color: rgba(57, 91, 100, 0.1);
+      border-radius: 12px;
+      padding: 24px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(165, 201, 202, 0.2);
+    }
+
+    .header {
+      margin-bottom: 32px;
+    }
+
+    .title {
+      font-size: 24px;
+      color: #00FFFF;
+      margin-bottom: 8px;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #A5C9CA;
+      opacity: 0.8;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 24px;
+    }
+
+    .gossip-feed {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .gossip-card {
+      background: rgba(57, 91, 100, 0.2);
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid rgba(165, 201, 202, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .gossip-card:hover {
+      transform: translateY(-2px);
+      border-color: #00FFFF;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+    }
+
+    .gossip-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .gossip-source {
+      font-size: 14px;
+      color: #00FFFF;
+    }
+
+    .gossip-time {
+      font-size: 12px;
+      opacity: 0.6;
+    }
+
+    .gossip-content {
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    .gossip-tags {
+      display: flex;
+      gap: 8px;
+    }
+
+    .tag {
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      background: rgba(0, 255, 255, 0.1);
+      color: #00FFFF;
+    }
+
+    .info-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .info-card {
+      background: rgba(57, 91, 100, 0.2);
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid rgba(165, 201, 202, 0.1);
+    }
+
+    .info-title {
+      font-size: 18px;
+      color: #00FFFF;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .relationship-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .relationship-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px;
+      border-radius: 8px;
+      background: rgba(0, 255, 255, 0.05);
+    }
+
+    .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(0, 255, 255, 0.1);
+      border: 2px solid #00FFFF;
+    }
+
+    .relationship-info {
+      flex-grow: 1;
+    }
+
+    .person-name {
+      font-size: 14px;
+      color: #00FFFF;
+      margin-bottom: 4px;
+    }
+
+    .relationship-status {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    .btn {
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: none;
+      border: 1px solid;
+      color: inherit;
+      margin-top: 16px;
+    }
+
+    .btn-primary {
+      border-color: #00FFFF;
+      color: #00FFFF;
+    }
+
+    .btn-primary:hover {
+      background: rgba(0, 255, 255, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 class="title">茶水间情报</h1>
+      <div class="subtitle">掌握公司内部最新动态</div>
+    </div>
+
+    <div class="info-grid">
+      <div class="gossip-feed">
+        <div class="gossip-card">
+          <div class="gossip-header">
+            <div class="gossip-source">技术部茶水间</div>
+            <div class="gossip-time">10分钟前</div>
+          </div>
+          <div class="gossip-content">
+            听说技术总监最近频繁与市场部开会，可能有大项目要启动了。新项目团队名单已经在筹备中，重点关注AI方向。
+          </div>
+          <div class="gossip-tags">
+            <span class="tag">项目动态</span>
+            <span class="tag">人事变动</span>
+          </div>
+        </div>
+
+        <div class="gossip-card">
+          <div class="gossip-header">
+            <div class="gossip-source">行政部门口</div>
+            <div class="gossip-time">30分钟前</div>
+          </div>
+          <div class="gossip-content">
+            财务部门最近加班频繁，据说在准备新一轮融资材料。有消息称可能涉及海外业务扩张计划。
+          </div>
+          <div class="gossip-tags">
+            <span class="tag">融资信息</span>
+            <span class="tag">业务发展</span>
+          </div>
+        </div>
+
+        <div class="gossip-card">
+          <div class="gossip-header">
+            <div class="gossip-source">人事部走廊</div>
+            <div class="gossip-time">2小时前</div>
+          </div>
+          <div class="gossip-content">
+            新来的副总裁带来了原公司的几个核心成员，看来是要组建新的业务团队。老员工们议论纷纷，不知道会有什么变化。
+          </div>
+          <div class="gossip-tags">
+            <span class="tag">高层动态</span>
+            <span class="tag">团队变动</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-sidebar">
+        <div class="info-card">
+          <h2 class="info-title">重要人际关系</h2>
+          <div class="relationship-list">
+            <div class="relationship-item">
+              <div class="avatar"></div>
+              <div class="relationship-info">
+                <div class="person-name">张总监</div>
+                <div class="relationship-status">关系良好 | 影响力：高</div>
+              </div>
+            </div>
+            <div class="relationship-item">
+              <div class="avatar"></div>
+              <div class="relationship-info">
+                <div class="person-name">李经理</div>
+                <div class="relationship-status">一般关系 | 影响力：中</div>
+              </div>
+            </div>
+            <div class="relationship-item">
+              <div class="avatar"></div>
+              <div class="relationship-info">
+                <div class="person-name">王主管</div>
+                <div class="relationship-status">关系紧张 | 影响力：中</div>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-primary">管理关系</button>
+        </div>
+
+        <div class="info-card">
+          <h2 class="info-title">情报收集进度</h2>
+          <div class="relationship-list">
+            <div class="relationship-item">
+              <div class="relationship-info">
+                <div class="person-name">技术部动向</div>
+                <div class="relationship-status">进度：75%</div>
+              </div>
+            </div>
+            <div class="relationship-item">
+              <div class="relationship-info">
+                <div class="person-name">市场部计划</div>
+                <div class="relationship-status">进度：45%</div>
+              </div>
+            </div>
+            <div class="relationship-item">
+              <div class="relationship-info">
+                <div class="person-name">高层决策</div>
+                <div class="relationship-status">进度：30%</div>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-primary">收集情报</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>会议管理</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: #2C3333;
+      color: #A5C9CA;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background-color: rgba(57, 91, 100, 0.1);
+      border-radius: 12px;
+      padding: 24px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(165, 201, 202, 0.2);
+    }
+
+    .header {
+      margin-bottom: 32px;
+    }
+
+    .title {
+      font-size: 24px;
+      color: #00FFFF;
+      margin-bottom: 8px;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #A5C9CA;
+      opacity: 0.8;
+    }
+
+    .meeting-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .meeting-card {
+      background: rgba(57, 91, 100, 0.2);
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid rgba(165, 201, 202, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .meeting-card:hover {
+      transform: translateY(-2px);
+      border-color: #00FFFF;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+    }
+
+    .section-title {
+      font-size: 18px;
+      color: #00FFFF;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .meeting-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .meeting-item {
+      background: rgba(0, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .meeting-item:hover {
+      background: rgba(0, 255, 255, 0.1);
+    }
+
+    .meeting-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .meeting-name {
+      color: #00FFFF;
+      font-size: 14px;
+    }
+
+    .meeting-time {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    .meeting-info {
+      font-size: 12px;
+      opacity: 0.8;
+      line-height: 1.4;
+    }
+
+    .meeting-status {
+      font-size: 12px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: rgba(0, 255, 255, 0.1);
+    }
+
+    .btn {
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: none;
+      border: 1px solid;
+      color: inherit;
+      margin-top: 16px;
+    }
+
+    .btn-primary {
+      border-color: #00FFFF;
+      color: #00FFFF;
+    }
+
+    .btn-primary:hover {
+      background: rgba(0, 255, 255, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 class="title">会议管理</h1>
+      <div class="subtitle">预约、管理和记录会议，提高团队协作效率</div>
+    </div>
+
+    <div class="meeting-grid">
+      <!-- 会议预约 -->
+      <div class="meeting-card">
+        <h2 class="section-title">会议预约</h2>
+        <div class="meeting-list">
+          <div class="meeting-item">
+            <div class="meeting-header">
+              <span class="meeting-name">项目进度评审</span>
+              <span class="meeting-time">今天 14:00</span>
+            </div>
+            <div class="meeting-info">主题：Q4项目进度汇报与评估</div>
+            <div class="meeting-info">地点：第三会议室</div>
+          </div>
+          <div class="meeting-item">
+            <div class="meeting-header">
+              <span class="meeting-name">团队周会</span>
+              <span class="meeting-time">明天 10:00</span>
+            </div>
+            <div class="meeting-info">主题：本周工作总结与下周计划</div>
+            <div class="meeting-info">地点：第一会议室</div>
+          </div>
+        </div>
+        <button class="btn btn-primary">预约会议</button>
+      </div>
+
+      <!-- 会议日程 -->
+      <div class="meeting-card">
+        <h2 class="section-title">会议日程</h2>
+        <div class="meeting-list">
+          <div class="meeting-item">
+            <div class="meeting-header">
+              <span class="meeting-name">产品设计评审</span>
+              <span class="meeting-status">进行中</span>
+            </div>
+            <div class="meeting-info">参会人数：8人</div>
+            <div class="meeting-info">持续时间：1小时</div>
+          </div>
+          <div class="meeting-item">
+            <div class="meeting-header">
+              <span class="meeting-name">技术架构讨论</span>
+              <span class="meeting-status">待开始</span>
+            </div>
+            <div class="meeting-info">参会人数：5人</div>
+            <div class="meeting-info">持续时间：2小时</div>
+          </div>
+        </div>
+        <button class="btn btn-primary">查看日程</button>
+      </div>
+
+      <!-- 会议记录 -->
+      <div class="meeting-card">
+        <h2 class="section-title">会议记录</h2>
+        <div class="meeting-list">
+          <div class="meeting-item">
+            <div class="meeting-header">
+              <span class="meeting-name">战略规划会议</span>
+              <span class="meeting-time">2023/12/15</span>
+            </div>
+            <div class="meeting-info">记录人：张经理</div>
+            <div class="meeting-info">会议时长：90分钟</div>
+          </div>
+          <div class="meeting-item">
+            <div class="meeting-header">
+              <span class="meeting-name">部门协调会</span>
+              <span class="meeting-time">2023/12/14</span>
+            </div>
+            <div class="meeting-info">记录人：李主管</div>
+            <div class="meeting-info">会议时长：60分钟</div>
+          </div>
+        </div>
+        <button class="btn btn-primary">查看记录</button>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

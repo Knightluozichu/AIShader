@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>社交策略</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: #2C3333;
+      color: #A5C9CA;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background-color: rgba(57, 91, 100, 0.1);
+      border-radius: 12px;
+      padding: 24px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(165, 201, 202, 0.2);
+    }
+
+    .header {
+      margin-bottom: 32px;
+    }
+
+    .title {
+      font-size: 24px;
+      color: #00FFFF;
+      margin-bottom: 8px;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #A5C9CA;
+      opacity: 0.8;
+    }
+
+    .strategy-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .strategy-card {
+      background: rgba(57, 91, 100, 0.2);
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid rgba(165, 201, 202, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .strategy-card:hover {
+      transform: translateY(-2px);
+      border-color: #00FFFF;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+    }
+
+    .section-title {
+      font-size: 18px;
+      color: #00FFFF;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .skill-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .skill-item {
+      background: rgba(0, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    .skill-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .skill-name {
+      color: #00FFFF;
+      font-size: 14px;
+    }
+
+    .skill-level {
+      font-size: 14px;
+    }
+
+    .skill-bar {
+      height: 8px;
+      background: rgba(0, 255, 255, 0.1);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .skill-progress {
+      height: 100%;
+      background: linear-gradient(90deg, #00FFFF, #39FF14);
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+    }
+
+    .relationship-tips {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .tip-item {
+      background: rgba(0, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    .tip-title {
+      color: #00FFFF;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .tip-content {
+      font-size: 12px;
+      opacity: 0.8;
+      line-height: 1.4;
+    }
+
+    .political-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .action-item {
+      background: rgba(0, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .action-item:hover {
+      background: rgba(0, 255, 255, 0.1);
+    }
+
+    .action-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .action-name {
+      color: #00FFFF;
+      font-size: 14px;
+    }
+
+    .action-cost {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    .action-description {
+      font-size: 12px;
+      opacity: 0.8;
+      line-height: 1.4;
+    }
+
+    .btn {
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: none;
+      border: 1px solid;
+      color: inherit;
+      margin-top: 16px;
+    }
+
+    .btn-primary {
+      border-color: #00FFFF;
+      color: #00FFFF;
+    }
+
+    .btn-primary:hover {
+      background: rgba(0, 255, 255, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 class="title">社交策略</h1>
+      <div class="subtitle">提升您的社交技能与政治手腕</div>
+    </div>
+
+    <div class="strategy-grid">
+      <!-- 社交技能 -->
+      <div class="strategy-card">
+        <h2 class="section-title">社交技能</h2>
+        <div class="skill-list">
+          <div class="skill-item">
+            <div class="skill-header">
+              <span class="skill-name">谈判能力</span>
+              <span class="skill-level">Lv.8</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" style="width: 80%"></div>
+            </div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header">
+              <span class="skill-name">人际洞察</span>
+              <span class="skill-level">Lv.6</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" style="width: 60%"></div>
+            </div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-header">
+              <span class="skill-name">说服力</span>
+              <span class="skill-level">Lv.7</span>
+            </div>
+            <div class="skill-bar">
+              <div class="skill-progress" style="width: 70%"></div>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-primary">提升技能</button>
+      </div>
+
+      <!-- 关系经营 -->
+      <div class="strategy-card">
+        <h2 class="section-title">关系经营</h2>
+        <div class="relationship-tips">
+          <div class="tip-item">
+            <div class="tip-title">建立信任</div>
+            <div class="tip-content">保持承诺，展现专业能力，逐步建立可靠的合作关系。</div>
+          </div>
+          <div class="tip-item">
+            <div class="tip-title">互惠互利</div>
+            <div class="tip-content">寻找共同利益点，创造双赢局面，增强合作粘性。</div>
+          </div>
+          <div class="tip-item">
+            <div class="tip-title">危机处理</div>
+            <div class="tip-content">及时沟通，积极解决问题，将危机转化为加深关系的机会。</div>
+          </div>
+        </div>
+        <button class="btn btn-primary">查看更多</button>
+      </div>
+
+      <!-- 政治手腕 -->
+      <div class="strategy-card">
+        <h2 class="section-title">政治手腕</h2>
+        <div class="political-actions">
+          <div class="action-item">
+            <div class="action-header">
+              <span class="action-name">结盟提议</span>
+              <span class="action-cost">影响力：30</span>
+            </div>
+            <div class="action-description">与其他派系建立临时联盟，共同推进某项决策。</div>
+          </div>
+          <div class="action-item">
+            <div class="action-header">
+              <span class="action-name">信息交换</span>
+              <span class="action-cost">影响力：20</span>
+            </div>
+            <div class="action-description">与其他派系交换有价值的信息，增进互信。</div>
+          </div>
+          <div class="action-item">
+            <div class="action-header">
+              <span class="action-name">施加影响</span>
+              <span class="action-cost">影响力：40</span>
+            </div>
+            <div class="action-description">利用自身资源和关系网络影响决策走向。</div>
+          </div>
+        </div>
+        <button class="btn btn-primary">执行行动</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

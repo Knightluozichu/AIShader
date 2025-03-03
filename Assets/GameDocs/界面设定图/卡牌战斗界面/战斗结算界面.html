@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>水浒 - FUK-U 战斗结算报告</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    }
+    
+    body {
+      background: linear-gradient(45deg, #1A237E, #0288D1);
+      color: #FFFFFF;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1200px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      opacity: 0;
+      animation: fadeIn 0.5s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* 战斗结果横幅 */
+    .battle-result {
+      height: 200px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      transform: translateY(-50px);
+      opacity: 0;
+      animation: slideDown 0.5s ease forwards;
+      animation-delay: 0.3s;
+    }
+
+    @keyframes slideDown {
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .battle-result::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 200%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      animation: shine 2s linear infinite;
+    }
+
+    @keyframes shine {
+      to {
+        transform: translateX(50%);
+      }
+    }
+
+    .result-title {
+      font-size: 36px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+
+    .result-subtitle {
+      font-size: 18px;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    /* 业绩数据总览 */
+    .performance-overview {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      transform: translateY(30px);
+      opacity: 0;
+      animation: slideUp 0.5s ease forwards;
+      animation-delay: 0.6s;
+    }
+
+    @keyframes slideUp {
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .stat-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      padding: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .stat-title {
+      font-size: 20px;
+      margin-bottom: 15px;
+      color: #00FFFF;
+    }
+
+    .stat-value {
+      font-size: 32px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .stat-chart {
+      height: 150px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      margin-top: 15px;
+    }
+
+    /* 详细战斗数据 */
+    .battle-details {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      padding: 20px;
+      transform: translateY(30px);
+      opacity: 0;
+      animation: slideUp 0.5s ease forwards;
+      animation-delay: 0.9s;
+    }
+
+    .details-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .details-table th,
+    .details-table td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .details-table th {
+      color: #00FFFF;
+      font-weight: normal;
+    }
+
+    /* 奖励展示区 */
+    .rewards-section {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      padding: 10px;
+      transform: translateY(30px);
+      opacity: 0;
+      animation: slideUp 0.5s ease forwards;
+      animation-delay: 1.2s;
+    }
+
+    .reward-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      padding: 20px;
+      min-width: 200px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .reward-card:hover {
+      transform: scale(1.05) rotate(2deg);
+    }
+
+    /* 行动按钮区 */
+    .action-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+      transform: translateY(30px);
+      opacity: 0;
+      animation: slideUp 0.5s ease forwards;
+      animation-delay: 1.5s;
+    }
+
+    .btn {
+      padding: 15px 30px;
+      border-radius: 30px;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      color: #FFFFFF;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-primary {
+      background: linear-gradient(45deg, #0288D1, #00FFFF);
+    }
+
+    @media (max-width: 1200px) {
+      .performance-overview {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .performance-overview {
+        grid-template-columns: 1fr;
+      }
+
+      .battle-result {
+        height: 150px;
+      }
+
+      .result-title {
+        font-size: 24px;
+      }
+
+      .result-subtitle {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="battle-result">
+      <h1 class="result-title">胜利 - 业绩汇报完成</h1>
+      <p class="result-subtitle">对战回合：12 | 用时：5分30秒</p>
+    </div>
+
+    <div class="performance-overview">
+      <div class="stat-card">
+        <h3 class="stat-title">伤害统计</h3>
+        <div class="stat-value">8,750</div>
+        <p>总输出伤害</p>
+        <div class="stat-chart"></div>
+      </div>
+      <div class="stat-card">
+        <h3 class="stat-title">战斗效率</h3>
+        <div class="stat-value">85%</div>
+        <p>能量利用率</p>
+        <div class="stat-chart"></div>
+      </div>
+      <div class="stat-card">
+        <h3 class="stat-title">防御分析</h3>
+        <div class="stat-value">12</div>
+        <p>有效防御次数</p>
+        <div class="stat-chart"></div>
+      </div>
+    </div>
+
+    <div class="battle-details">
+      <table class="details-table">
+        <thead>
+          <tr>
+            <th>回合</th>
+            <th>行动</th>
+            <th>效果</th>
+            <th>评分</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>使用 [项目管理]</td>
+            <td>降低30%工作压力</td>
+            <td>A+</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>使用 [数据分析]</td>
+            <td>获得市场洞察</td>
+            <td>S</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>使用 [战略规划]</td>
+            <td>增加20%收益</td>
+            <td>A</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="rewards-section">
+      <div class="reward-card">
+        <h3>经验值</h3>
+        <p>+1,200</p>
+      </div>
+      <div class="reward-card">
+        <h3>技能点</h3>
+        <p>+3</p>
+      </div>
+      <div class="reward-card">
+        <h3>新卡牌</h3>
+        <p>创新突破</p>
+      </div>
+      <div class="reward-card">
+        <h3>特殊成就</h3>
+        <p>完美决策</p>
+      </div>
+    </div>
+
+    <div class="action-buttons">
+      <button class="btn btn-primary">提交报告</button>
+      <button class="btn">复盘分析</button>
+      <button class="btn">分享战报</button>
+    </div>
+  </div>
+</body>
+</html>

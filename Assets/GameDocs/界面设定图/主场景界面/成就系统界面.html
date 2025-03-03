@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>成就系统</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: #2C3333;
+      color: #A5C9CA;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background-color: rgba(57, 91, 100, 0.1);
+      border-radius: 12px;
+      padding: 24px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(165, 201, 202, 0.2);
+    }
+
+    .header {
+      margin-bottom: 32px;
+    }
+
+    .title {
+      font-size: 24px;
+      color: #00FFFF;
+      margin-bottom: 8px;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #A5C9CA;
+      opacity: 0.8;
+    }
+
+    .achievement-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .achievement-card {
+      background: rgba(57, 91, 100, 0.2);
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid rgba(165, 201, 202, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .achievement-card:hover {
+      transform: translateY(-2px);
+      border-color: #00FFFF;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+    }
+
+    .section-title {
+      font-size: 18px;
+      color: #00FFFF;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .achievement-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .achievement-item {
+      background: rgba(0, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .achievement-item.unlocked {
+      border: 1px solid rgba(0, 255, 255, 0.3);
+    }
+
+    .achievement-item.in-progress {
+      border: 1px solid rgba(255, 187, 51, 0.3);
+    }
+
+    .achievement-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .achievement-name {
+      font-size: 16px;
+      color: #00FFFF;
+    }
+
+    .achievement-points {
+      font-size: 14px;
+      padding: 2px 8px;
+      border-radius: 12px;
+      background: rgba(0, 255, 255, 0.1);
+    }
+
+    .achievement-description {
+      font-size: 12px;
+      opacity: 0.8;
+      margin-bottom: 8px;
+    }
+
+    .achievement-progress {
+      height: 4px;
+      background: rgba(165, 201, 202, 0.1);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: #00FFFF;
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+
+    .leaderboard-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .leaderboard-item {
+      display: flex;
+      align-items: center;
+      padding: 12px;
+      background: rgba(0, 255, 255, 0.05);
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .leaderboard-item:hover {
+      background: rgba(0, 255, 255, 0.1);
+    }
+
+    .rank {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      margin-right: 12px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .rank-1 {
+      background: linear-gradient(45deg, #FFD700, #FFA500);
+      color: #2C3333;
+    }
+
+    .rank-2 {
+      background: linear-gradient(45deg, #C0C0C0, #A9A9A9);
+      color: #2C3333;
+    }
+
+    .rank-3 {
+      background: linear-gradient(45deg, #CD7F32, #8B4513);
+      color: #2C3333;
+    }
+
+    .player-info {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .player-name {
+      font-size: 14px;
+      color: #00FFFF;
+    }
+
+    .achievement-count {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    .total-points {
+      font-size: 16px;
+      color: #00FFFF;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 class="title">成就系统</h1>
+      <div class="subtitle">展示您的成就和荣誉</div>
+    </div>
+
+    <div class="achievement-grid">
+      <!-- 已解锁成就 -->
+      <div class="achievement-card">
+        <h2 class="section-title">已解锁成就</h2>
+        <div class="achievement-list">
+          <div class="achievement-item unlocked">
+            <div class="achievement-header">
+              <span class="achievement-name">代码大师</span>
+              <span class="achievement-points">500分</span>
+            </div>
+            <div class="achievement-description">完成100个代码审查，保持代码质量</div>
+          </div>
+          <div class="achievement-item unlocked">
+            <div class="achievement-header">
+              <span class="achievement-name">创新先锋</span>
+              <span class="achievement-points">300分</span>
+            </div>
+            <div class="achievement-description">提出10个创新方案并成功实施</div>
+          </div>
+          <div class="achievement-item unlocked">
+            <div class="achievement-header">
+              <span class="achievement-name">团队领袖</span>
+              <span class="achievement-points">400分</span>
+            </div>
+            <div class="achievement-description">成功带领团队完成5个重大项目</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 进行中成就 -->
+      <div class="achievement-card">
+        <h2 class="section-title">进行中成就</h2>
+        <div class="achievement-list">
+          <div class="achievement-item in-progress">
+            <div class="achievement-header">
+              <span class="achievement-name">技术专家</span>
+              <span class="achievement-points">600分</span>
+            </div>
+            <div class="achievement-description">发表3篇技术文章并获得广泛认可</div>
+            <div class="achievement-progress">
+              <div class="progress-bar" style="width: 66%"></div>
+            </div>
+          </div>
+          <div class="achievement-item in-progress">
+            <div class="achievement-header">
+              <span class="achievement-name">效率之星</span>
+              <span class="achievement-points">400分</span>
+            </div>
+            <div class="achievement-description">连续30天完成工作目标</div>
+            <div class="achievement-progress">
+              <div class="progress-bar" style="width: 80%"></div>
+            </div>
+          </div>
+          <div class="achievement-item in-progress">
+            <div class="achievement-header">
+              <span class="achievement-name">创新能手</span>
+              <span class="achievement-points">350分</span>
+            </div>
+            <div class="achievement-description">提出5个改进建议并实施</div>
+            <div class="achievement-progress">
+              <div class="progress-bar" style="width: 40%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 成就排行榜 -->
+      <div class="achievement-card">
+        <h2 class="section-title">成就排行榜</h2>
+        <div class="leaderboard-list">
+          <div class="leaderboard-item">
+            <div class="rank rank-1">1</div>
+            <div class="player-info">
+              <div class="player-name">张三</div>
+              <div class="achievement-count">解锁成就: 25个</div>
+            </div>
+            <div class="total-points">2,500分</div>
+          </div>
+          <div class="leaderboard-item">
+            <div class="rank rank-2">2</div>
+            <div class="player-info">
+              <div class="player-name">李四</div>
+              <div class="achievement-count">解锁成就: 22个</div>
+            </div>
+            <div class="total-points">2,200分</div>
+          </div>
+          <div class="leaderboard-item">
+            <div class="rank rank-3">3</div>
+            <div class="player-info">
+              <div class="player-name">王五</div>
+              <div class="achievement-count">解锁成就: 20个</div>
+            </div>
+            <div class="total-points">2,000分</div>
+          </div>
+          <div class="leaderboard-item">
+            <div class="rank">4</div>
+            <div class="player-info">
+              <div class="player-name">赵六</div>
+              <div class="achievement-count">解锁成就: 18个</div>
+            </div>
+            <div class="total-points">1,800分</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

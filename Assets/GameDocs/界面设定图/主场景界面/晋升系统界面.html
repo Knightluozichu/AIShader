@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>晋升系统</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: #2C3333;
+      color: #A5C9CA;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background-color: rgba(57, 91, 100, 0.1);
+      border-radius: 12px;
+      padding: 24px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(165, 201, 202, 0.2);
+    }
+
+    .header {
+      margin-bottom: 32px;
+    }
+
+    .title {
+      font-size: 24px;
+      color: #00FFFF;
+      margin-bottom: 8px;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #A5C9CA;
+      opacity: 0.8;
+    }
+
+    .promotion-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .promotion-card {
+      background: rgba(57, 91, 100, 0.2);
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid rgba(165, 201, 202, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .promotion-card:hover {
+      transform: translateY(-2px);
+      border-color: #00FFFF;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .card-title {
+      font-size: 18px;
+      color: #00FFFF;
+    }
+
+    .interview-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .interview-item {
+      background: rgba(57, 91, 100, 0.3);
+      border-radius: 8px;
+      padding: 12px;
+      border: 1px solid rgba(165, 201, 202, 0.1);
+    }
+
+    .interview-time {
+      font-size: 14px;
+      color: #00FFFF;
+      margin-bottom: 8px;
+    }
+
+    .interview-info {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    .path-list {
+      position: relative;
+    }
+
+    .path-item {
+      position: relative;
+      padding-left: 24px;
+      margin-bottom: 16px;
+    }
+
+    .path-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 12px;
+      height: 12px;
+      background: #00FFFF;
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+
+    .path-item::after {
+      content: '';
+      position: absolute;
+      left: 5px;
+      top: 20px;
+      width: 2px;
+      height: calc(100% + 4px);
+      background: rgba(0, 255, 255, 0.2);
+    }
+
+    .path-item:last-child::after {
+      display: none;
+    }
+
+    .path-title {
+      font-size: 16px;
+      color: #00FFFF;
+      margin-bottom: 4px;
+    }
+
+    .path-description {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    .skill-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .skill-item {
+      background: rgba(57, 91, 100, 0.3);
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    .skill-name {
+      font-size: 14px;
+      color: #00FFFF;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .skill-progress {
+      height: 4px;
+      background: rgba(165, 201, 202, 0.1);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: #00FFFF;
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+
+    .btn {
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: none;
+      border: 1px solid #00FFFF;
+      color: #00FFFF;
+    }
+
+    .btn:hover {
+      background: rgba(0, 255, 255, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 class="title">晋升系统</h1>
+      <div class="subtitle">规划你的职业发展路径</div>
+    </div>
+
+    <div class="promotion-grid">
+      <!-- 面试预约 -->
+      <div class="promotion-card">
+        <div class="card-header">
+          <div class="card-title">面试预约</div>
+          <button class="btn">预约面试</button>
+        </div>
+        <div class="interview-list">
+          <div class="interview-item">
+            <div class="interview-time">2024-02-20 14:00</div>
+            <div class="interview-info">高级工程师晋升面试</div>
+          </div>
+          <div class="interview-item">
+            <div class="interview-time">2024-02-25 10:00</div>
+            <div class="interview-info">技术专家评估会</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 晋升路径 -->
+      <div class="promotion-card">
+        <div class="card-header">
+          <div class="card-title">晋升路径</div>
+        </div>
+        <div class="path-list">
+          <div class="path-item">
+            <div class="path-title">初级工程师</div>
+            <div class="path-description">掌握基本技能，完成指定任务</div>
+          </div>
+          <div class="path-item">
+            <div class="path-title">中级工程师</div>
+            <div class="path-description">独立负责项目，解决复杂问题</div>
+          </div>
+          <div class="path-item">
+            <div class="path-title">高级工程师</div>
+            <div class="path-description">系统架构设计，团队技术指导</div>
+          </div>
+          <div class="path-item">
+            <div class="path-title">技术专家</div>
+            <div class="path-description">技术战略规划，创新方案研究</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 技能要求 -->
+      <div class="promotion-card">
+        <div class="card-header">
+          <div class="card-title">技能要求</div>
+        </div>
+        <div class="skill-list">
+          <div class="skill-item">
+            <div class="skill-name">
+              <span>系统架构</span>
+              <span>80%</span>
+            </div>
+            <div class="skill-progress">
+              <div class="progress-bar" style="width: 80%"></div>
+            </div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-name">
+              <span>代码质量</span>
+              <span>85%</span>
+            </div>
+            <div class="skill-progress">
+              <div class="progress-bar" style="width: 85%"></div>
+            </div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-name">
+              <span>团队协作</span>
+              <span>90%</span>
+            </div>
+            <div class="skill-progress">
+              <div class="progress-bar" style="width: 90%"></div>
+            </div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-name">
+              <span>问题解决</span>
+              <span>88%</span>
+            </div>
+            <div class="skill-progress">
+              <div class="progress-bar" style="width: 88%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>参会人员</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: #2C3333;
+      color: #A5C9CA;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background-color: rgba(57, 91, 100, 0.1);
+      border-radius: 12px;
+      padding: 24px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(165, 201, 202, 0.2);
+    }
+
+    .header {
+      margin-bottom: 32px;
+    }
+
+    .title {
+      font-size: 24px;
+      color: #00FFFF;
+      margin-bottom: 8px;
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #A5C9CA;
+      opacity: 0.8;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .stats-card {
+      background: rgba(57, 91, 100, 0.2);
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid rgba(165, 201, 202, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .stats-card:hover {
+      transform: translateY(-2px);
+      border-color: #00FFFF;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+    }
+
+    .section-title {
+      font-size: 18px;
+      color: #00FFFF;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .stats-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .stats-item {
+      background: rgba(0, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .stats-item:hover {
+      background: rgba(0, 255, 255, 0.1);
+    }
+
+    .stats-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .stats-name {
+      color: #00FFFF;
+      font-size: 14px;
+    }
+
+    .stats-value {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    .stats-info {
+      font-size: 12px;
+      opacity: 0.8;
+      line-height: 1.4;
+    }
+
+    .stats-progress {
+      height: 4px;
+      background: rgba(0, 255, 255, 0.1);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #00FFFF, #39FF14);
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+    }
+
+    .btn {
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: none;
+      border: 1px solid;
+      color: inherit;
+      margin-top: 16px;
+    }
+
+    .btn-primary {
+      border-color: #00FFFF;
+      color: #00FFFF;
+    }
+
+    .btn-primary:hover {
+      background: rgba(0, 255, 255, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 class="title">参会人员</h1>
+      <div class="subtitle">跟踪参会情况，评估互动表现</div>
+    </div>
+
+    <div class="stats-grid">
+      <!-- 出勤统计 -->
+      <div class="stats-card">
+        <h2 class="section-title">出勤统计</h2>
+        <div class="stats-list">
+          <div class="stats-item">
+            <div class="stats-header">
+              <span class="stats-name">张经理</span>
+              <span class="stats-value">98%</span>
+            </div>
+            <div class="stats-info">本月参会：12次</div>
+            <div class="stats-info">准时率：100%</div>
+            <div class="stats-progress">
+              <div class="progress-fill" style="width: 98%"></div>
+            </div>
+          </div>
+          <div class="stats-item">
+            <div class="stats-header">
+              <span class="stats-name">李主管</span>
+              <span class="stats-value">95%</span>
+            </div>
+            <div class="stats-info">本月参会：10次</div>
+            <div class="stats-info">准时率：95%</div>
+            <div class="stats-progress">
+              <div class="progress-fill" style="width: 95%"></div>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-primary">查看详情</button>
+      </div>
+
+      <!-- 发言记录 -->
+      <div class="stats-card">
+        <h2 class="section-title">发言记录</h2>
+        <div class="stats-list">
+          <div class="stats-item">
+            <div class="stats-header">
+              <span class="stats-name">产品评审会</span>
+              <span class="stats-value">12/15</span>
+            </div>
+            <div class="stats-info">发言人：张经理</div>
+            <div class="stats-info">时长：15分钟</div>
+            <div class="stats-info">主题：新功能设计方案</div>
+          </div>
+          <div class="stats-item">
+            <div class="stats-header">
+              <span class="stats-name">周会</span>
+              <span class="stats-value">12/14</span>
+            </div>
+            <div class="stats-info">发言人：李主管</div>
+            <div class="stats-info">时长：10分钟</div>
+            <div class="stats-info">主题：项目进度汇报</div>
+          </div>
+        </div>
+        <button class="btn btn-primary">查看记录</button>
+      </div>
+
+      <!-- 互动评分 -->
+      <div class="stats-card">
+        <h2 class="section-title">互动评分</h2>
+        <div class="stats-list">
+          <div class="stats-item">
+            <div class="stats-header">
+              <span class="stats-name">张经理</span>
+              <span class="stats-value">92分</span>
+            </div>
+            <div class="stats-info">参与度：95%</div>
+            <div class="stats-info">建议质量：90%</div>
+            <div class="stats-progress">
+              <div class="progress-fill" style="width: 92%"></div>
+            </div>
+          </div>
+          <div class="stats-item">
+            <div class="stats-header">
+              <span class="stats-name">李主管</span>
+              <span class="stats-value">88分</span>
+            </div>
+            <div class="stats-info">参与度：85%</div>
+            <div class="stats-info">建议质量：92%</div>
+            <div class="stats-progress">
+              <div class="progress-fill" style="width: 88%"></div>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-primary">查看评分</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
